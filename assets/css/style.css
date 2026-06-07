@@ -1,0 +1,561 @@
+/* Het Weer Uitgelegd — Meteorologisch Kennisportaal Suriname */
+
+:root {
+  --blue-dark: #0b3d63;
+  --blue: #1f6fb2;
+  --blue-light: #4fa3da;
+  --green: #1f7a4d;
+  --orange: #e0792c;
+  --red: #c0392b;
+  --bg: #f7f9fb;
+  --card-bg: #ffffff;
+  --text: #1f2933;
+  --text-muted: #52606d;
+  --border: #d9e2ec;
+  --radius: 10px;
+  --max-width: 1180px;
+}
+
+* { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  font-family: "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  color: var(--text);
+  background: var(--bg);
+  line-height: 1.6;
+}
+
+img { max-width: 100%; display: block; }
+
+a { color: var(--blue); text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+.container {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* ---------- Header & Navigation ---------- */
+
+.site-header {
+  background: var(--blue-dark);
+  color: #ffffff;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+}
+
+.site-header .container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  padding-top: 12px;
+  padding-bottom: 12px;
+  gap: 12px;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: #ffffff;
+  text-decoration: none;
+}
+
+.brand:hover { text-decoration: none; }
+
+.brand-emoji { font-size: 1.8rem; }
+
+.brand-name {
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: #ffffff;
+  letter-spacing: 0.3px;
+}
+
+.brand-tagline {
+  display: block;
+  font-size: 0.75rem;
+  font-weight: 400;
+  color: #cfe3f5;
+}
+
+.main-nav { width: 100%; }
+
+.main-nav ul {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  margin: 0;
+  padding: 0;
+  border-top: 1px solid rgba(255,255,255,0.15);
+  padding-top: 10px;
+}
+
+.main-nav a {
+  color: #eaf3fb;
+  font-weight: 600;
+  font-size: 0.92rem;
+  padding: 8px 12px;
+  border-radius: 6px;
+  display: inline-block;
+}
+
+.main-nav a:hover,
+.main-nav a.active {
+  background: rgba(255,255,255,0.16);
+  color: #ffffff;
+  text-decoration: none;
+}
+
+/* ---------- Hero ---------- */
+
+.hero {
+  position: relative;
+  background: linear-gradient(120deg, var(--blue-dark) 0%, var(--blue) 60%, var(--blue-light) 100%);
+  color: #ffffff;
+  padding: 64px 0 56px;
+}
+
+.hero h1 {
+  font-size: 2.4rem;
+  margin: 0 0 12px;
+  color: #ffffff;
+  text-shadow: 0 2px 10px rgba(0,0,0,0.35);
+}
+
+.hero p {
+  font-size: 1.1rem;
+  max-width: 720px;
+  color: #f1f7fc;
+  margin: 0 0 24px;
+}
+
+.hero .btn-row { display: flex; gap: 12px; flex-wrap: wrap; }
+
+/* Page header band used on inner pages — solid background, fully readable text */
+.page-header {
+  background: var(--blue-dark);
+  color: #ffffff;
+  padding: 40px 0;
+}
+
+.page-header h1 {
+  margin: 0 0 8px;
+  color: #ffffff;
+  font-size: 2rem;
+}
+
+.page-header p {
+  color: #eaf3fb;
+  margin: 0;
+  max-width: 760px;
+  font-size: 1.02rem;
+}
+
+/* ---------- Buttons ---------- */
+
+.btn {
+  display: inline-block;
+  padding: 12px 22px;
+  border-radius: 8px;
+  font-weight: 700;
+  font-size: 0.95rem;
+  border: 2px solid transparent;
+  cursor: pointer;
+}
+
+.btn-primary {
+  background: var(--orange);
+  color: #ffffff;
+}
+.btn-primary:hover { background: #c8661f; text-decoration: none; }
+
+.btn-secondary {
+  background: transparent;
+  color: #ffffff;
+  border-color: #ffffff;
+}
+.btn-secondary:hover { background: rgba(255,255,255,0.15); text-decoration: none; }
+
+/* ---------- Section layout ---------- */
+
+.section { padding: 56px 0; }
+.section + .section { border-top: 1px solid var(--border); }
+.section-alt { background: #eef4f9; }
+
+.section-title {
+  font-size: 1.7rem;
+  margin: 0 0 8px;
+  color: var(--blue-dark);
+}
+
+.section-intro {
+  color: var(--text-muted);
+  max-width: 760px;
+  margin: 0 0 32px;
+}
+
+/* ---------- Card grid ---------- */
+
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 22px;
+}
+
+.card {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 22px;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 24px rgba(11, 61, 99, 0.12);
+}
+
+.card-icon { font-size: 1.9rem; margin-bottom: 10px; }
+
+.card h3 {
+  margin: 0 0 8px;
+  color: var(--blue-dark);
+  font-size: 1.15rem;
+}
+
+.card p { color: var(--text-muted); margin: 0 0 12px; font-size: 0.95rem; }
+
+.card ul {
+  margin: 0;
+  padding-left: 18px;
+  color: var(--text-muted);
+  font-size: 0.93rem;
+}
+
+.card ul li { margin-bottom: 4px; }
+
+.card-link {
+  font-weight: 700;
+  font-size: 0.9rem;
+}
+
+/* Category band cards (homepage hub) — colored top border per theme */
+.card.theme-weer { border-top: 4px solid var(--blue); }
+.card.theme-klimaat { border-top: 4px solid var(--green); }
+.card.theme-verschijnselen { border-top: 4px solid var(--orange); }
+.card.theme-veiligheid { border-top: 4px solid var(--red); }
+.card.theme-leren { border-top: 4px solid #6c5ce7; }
+.card.theme-data { border-top: 4px solid #00838f; }
+
+/* ---------- Infographic showcase ---------- */
+
+.infographic-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 24px;
+}
+
+.infographic-card {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+
+.infographic-card figure { margin: 0; }
+
+.infographic-card img {
+  width: 100%;
+  height: auto;
+  border-bottom: 1px solid var(--border);
+}
+
+.infographic-placeholder {
+  aspect-ratio: 4 / 5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #e7eef5;
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  text-align: center;
+  padding: 20px;
+  border-bottom: 1px solid var(--border);
+}
+
+.infographic-card figcaption {
+  padding: 16px 18px;
+}
+
+.infographic-card h3 {
+  margin: 0 0 6px;
+  color: var(--blue-dark);
+  font-size: 1.08rem;
+}
+
+.infographic-card p {
+  margin: 0;
+  color: var(--text-muted);
+  font-size: 0.93rem;
+}
+
+/* ---------- Article / content blocks ---------- */
+
+.article {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 26px 28px;
+  margin-bottom: 22px;
+}
+
+.article h2 {
+  color: var(--blue-dark);
+  margin-top: 0;
+  font-size: 1.3rem;
+}
+
+.article h3 { color: var(--blue); font-size: 1.08rem; }
+
+.article p { color: var(--text); }
+
+.tag {
+  display: inline-block;
+  background: #eef4f9;
+  color: var(--blue-dark);
+  border-radius: 20px;
+  padding: 4px 12px;
+  font-size: 0.78rem;
+  font-weight: 700;
+  margin: 0 6px 6px 0;
+}
+
+/* ---------- FAQ accordion ---------- */
+
+.faq-item {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  margin-bottom: 12px;
+  overflow: hidden;
+}
+
+.faq-question {
+  width: 100%;
+  text-align: left;
+  background: #ffffff;
+  border: none;
+  padding: 16px 20px;
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--blue-dark);
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+}
+
+.faq-question:hover { background: #f3f8fc; }
+
+.faq-question .icon { font-size: 1.2rem; color: var(--blue); flex-shrink: 0; }
+
+.faq-answer {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.25s ease;
+  background: #fbfdff;
+}
+
+.faq-answer-inner {
+  padding: 0 20px 18px;
+  color: var(--text-muted);
+}
+
+.faq-item.open .faq-answer { max-height: 600px; }
+.faq-item.open .icon { transform: rotate(45deg); }
+
+/* ---------- Dictionary ---------- */
+
+.dictionary-search {
+  width: 100%;
+  max-width: 420px;
+  padding: 12px 16px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  font-size: 1rem;
+  margin-bottom: 24px;
+}
+
+.dictionary-list { display: grid; gap: 14px; }
+
+.dictionary-term {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-left: 4px solid var(--blue);
+  border-radius: 8px;
+  padding: 16px 20px;
+}
+
+.dictionary-term dt {
+  font-weight: 700;
+  color: var(--blue-dark);
+  font-size: 1.05rem;
+  margin-bottom: 4px;
+}
+
+.dictionary-term dd {
+  margin: 0;
+  color: var(--text-muted);
+}
+
+/* ---------- Mythes & Feiten ---------- */
+
+.myth-card {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 18px 20px;
+  margin-bottom: 14px;
+}
+
+.myth { color: var(--red); font-weight: 700; margin: 0 0 6px; }
+.fact { color: var(--green); font-weight: 700; margin: 0; }
+
+/* ---------- Forms (Vraag het de Meteoroloog / Contact) ---------- */
+
+.form-box {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 26px 28px;
+  max-width: 640px;
+}
+
+.form-box label {
+  display: block;
+  font-weight: 700;
+  color: var(--blue-dark);
+  margin: 14px 0 6px;
+}
+
+.form-box input,
+.form-box select,
+.form-box textarea {
+  width: 100%;
+  padding: 11px 14px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  font-size: 0.97rem;
+  font-family: inherit;
+}
+
+.form-box textarea { resize: vertical; min-height: 120px; }
+
+.form-box .btn { margin-top: 18px; }
+
+/* ---------- Contact info blocks ---------- */
+
+.contact-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 20px;
+  margin-bottom: 32px;
+}
+
+.contact-card {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 20px;
+  text-align: center;
+}
+
+.contact-card .card-icon { margin-bottom: 8px; }
+
+.contact-card h3 { margin: 0 0 6px; color: var(--blue-dark); font-size: 1.05rem; }
+
+.contact-card p { margin: 0; color: var(--text-muted); }
+
+.contact-card a { font-weight: 700; }
+
+/* ---------- Weer van de week / featured banner ---------- */
+
+.feature-banner {
+  background: linear-gradient(110deg, var(--green) 0%, #2fa66b 100%);
+  color: #ffffff;
+  border-radius: var(--radius);
+  padding: 28px 30px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.feature-banner h2,
+.feature-banner p { color: #ffffff; margin: 0; }
+
+.feature-banner h2 { font-size: 1.3rem; margin-bottom: 6px; }
+
+/* ---------- Footer ---------- */
+
+.site-footer {
+  background: var(--blue-dark);
+  color: #eaf3fb;
+  padding: 40px 0 24px;
+  margin-top: 40px;
+}
+
+.site-footer h4 {
+  color: #ffffff;
+  font-size: 1rem;
+  margin: 0 0 12px;
+}
+
+.footer-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 28px;
+  margin-bottom: 24px;
+}
+
+.site-footer ul { list-style: none; margin: 0; padding: 0; }
+.site-footer li { margin-bottom: 8px; }
+.site-footer a { color: #cfe3f5; }
+.site-footer a:hover { color: #ffffff; }
+
+.footer-bottom {
+  border-top: 1px solid rgba(255,255,255,0.15);
+  padding-top: 18px;
+  font-size: 0.85rem;
+  color: #b9d2ea;
+  text-align: center;
+}
+
+/* ---------- Breadcrumb ---------- */
+
+.breadcrumb {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  margin-bottom: 18px;
+}
+
+.breadcrumb a { color: var(--blue); }
+
+/* ---------- Responsive ---------- */
+
+@media (max-width: 640px) {
+  .hero h1 { font-size: 1.8rem; }
+  .section-title { font-size: 1.4rem; }
+  .page-header h1 { font-size: 1.6rem; }
+}
