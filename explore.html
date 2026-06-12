@@ -3,85 +3,152 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Explore 2025</title>
+  <title>Dashboard — Unit Klimatologie</title>
   <link rel="stylesheet" href="explore.css" />
 </head>
 <body>
-  <!-- Neon Rain Overlay -->
-  <div class="neon-rain"></div>
 
-  <div class="container">
-    <div class="left">
-      <h1>Explore <span id="year-heading"></span></h1>
-      <div id="intro">
-        <p>
-          Kies een <span class="glow">wereld</span> hier om te verkennen.<br />
-          Van <span class="glow">historische waarnemingen</span> tot <span class="glow">toekomstige modellen</span>:<br />
-          elke wereld toont een andere route van <span class="glow">klimaatdata</span>, <span class="glow">samenwerking</span> en <span class="glow">impact</span>.
-        </p>
-      </div>
-      <button onclick="goHome()">Terug naar homepage</button>
-    </div>
+  <header class="topbar">
+    <span class="topbar-brand">Unit Klimatologie Suriname</span>
+    <a href="index.html" class="btn-ghost">← Terug naar home</a>
+  </header>
 
-    <div class="worlds">
+  <div class="explore-layout">
 
-      <div class="world" onclick="window.location.href='klimatologie.html'">
-        🌍<span class="label">Klimaat van Suriname</span>
-      </div>
-
-      <a href="impact.html" class="world-link">
-        <div class="world">
-          🔮<span class="label">Klimaatimpact en Toekomstscenario’s</span>
-        </div>
+    <aside class="explore-sidebar">
+      <h1>Dashboard</h1>
+      <p class="explore-year">Klimaatdata <span id="year-heading"></span></p>
+      <p class="explore-desc">
+        Kies een categorie om te verkennen — van historische waarnemingen en klimaatnormalen
+        tot toekomstscenario's, kwaliteitscontrole en publieke meldingen.
+      </p>
+      <a href="index.html" class="btn-secondary" style="width:100%; justify-content:center;">
+        ← Terug naar homepage
       </a>
+    </aside>
 
-      <a href="verleden.html" class="world-link">
-        <div class="world">🕰️<span class="label">Klimaat in het verleden</span></div>
-      </a>
+    <main>
+      <div class="nav-grid">
 
-      <div class="world" onclick="window.location.href='klimaatnormalen.html'">
-        📊<span class="label">Klimaatnormalen</span>
+        <div class="nav-section-label">Klimaatinformatie</div>
+
+        <a href="klimatologie.html" class="nav-card" data-accent="teal">
+          <div class="nav-card-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+            </svg>
+          </div>
+          <div class="nav-card-body">
+            <div class="nav-card-title">Klimaat van Suriname</div>
+            <div class="nav-card-desc">Köppen-Geiger types, seizoenen, temperatuur, wind</div>
+          </div>
+          <span class="nav-card-arrow">›</span>
+        </a>
+
+        <a href="impact.html" class="nav-card" data-accent="amber">
+          <div class="nav-card-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>
+            </svg>
+          </div>
+          <div class="nav-card-body">
+            <div class="nav-card-title">Klimaatimpact &amp; Toekomst</div>
+            <div class="nav-card-desc">Scenario's, modellen en toekomstprojecties</div>
+          </div>
+          <span class="nav-card-arrow">›</span>
+        </a>
+
+        <div class="nav-section-label">Historische gegevens</div>
+
+        <a href="verleden.html" class="nav-card" data-accent="blue">
+          <div class="nav-card-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>
+            </svg>
+          </div>
+          <div class="nav-card-body">
+            <div class="nav-card-title">Klimaat in het verleden</div>
+            <div class="nav-card-desc">Tijdreeksen, kaarten, grafieken en rapporten</div>
+          </div>
+          <span class="nav-card-arrow">›</span>
+        </a>
+
+        <a href="klimaatnormalen.html" class="nav-card" data-accent="green">
+          <div class="nav-card-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/>
+            </svg>
+          </div>
+          <div class="nav-card-body">
+            <div class="nav-card-title">Klimaatnormalen</div>
+            <div class="nav-card-desc">30-jaar gemiddelden per element en station</div>
+          </div>
+          <span class="nav-card-arrow">›</span>
+        </a>
+
+        <div class="nav-section-label">Monitoring &amp; Operationeel</div>
+
+        <a href="login_hotspots.html" class="nav-card" data-accent="rain">
+          <div class="nav-card-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="8" y1="19" x2="8" y2="21"/><line x1="8" y1="13" x2="8" y2="15"/><line x1="16" y1="19" x2="16" y2="21"/><line x1="16" y1="13" x2="16" y2="15"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="12" y1="15" x2="12" y2="17"/><path d="M20 16.58A5 5 0 0 0 18 7h-1.26A8 8 0 1 0 4 15.25"/>
+            </svg>
+          </div>
+          <div class="nav-card-body">
+            <div class="nav-card-title">Rainfall Hotspots</div>
+            <div class="nav-card-desc">Actuele neerslagmonitoring per station</div>
+          </div>
+          <span class="nav-card-arrow">›</span>
+        </a>
+
+        <a href="QC.html" class="nav-card" data-accent="slate">
+          <div class="nav-card-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/>
+            </svg>
+          </div>
+          <div class="nav-card-body">
+            <div class="nav-card-title">QC Dashboard</div>
+            <div class="nav-card-desc">Kwaliteitscontrole van temperatuur- en winddata</div>
+          </div>
+          <span class="nav-card-arrow">›</span>
+        </a>
+
+        <div class="nav-section-label">Toegang &amp; Contact</div>
+
+        <a href="observer-login.html" class="nav-card" data-accent="slate">
+          <div class="nav-card-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+            </svg>
+          </div>
+          <div class="nav-card-body">
+            <div class="nav-card-title">Observer Login</div>
+            <div class="nav-card-desc">Invoer van meteorologische waarnemingen</div>
+          </div>
+          <span class="nav-card-arrow">›</span>
+        </a>
+
+        <a href="publiek.html" class="nav-card" data-accent="teal">
+          <div class="nav-card-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+            </svg>
+          </div>
+          <div class="nav-card-body">
+            <div class="nav-card-title">Publieke Connectie</div>
+            <div class="nav-card-desc">Meldpunt weergebeurtenissen en contact</div>
+          </div>
+          <span class="nav-card-arrow">›</span>
+        </a>
+
       </div>
+    </main>
 
-
-      <a href="observer-login.html" class="world-link">
-        <div class="world">🔐<span class="label">Observer Login</span></div>
-      </a>
-
-      <div class="world" onclick="window.location.href='publiek.html'">
-        📨<span class="label">Publieke Connectie</span>
-      </div>
-
-      <!-- ⭐ QC-DASHBOARD VIA QC.html -->
-      <div class="world" onclick="window.location.href='QC.html'">
-        🧪<span class="label">QC Dashboard</span>
-      </div>
-
-      <div class="world" onclick="window.location.href='login_hotspots.html'">
-  🌧️<span class="label">Rainfall Hotspots</span>
-</div>
-
-    </div>
   </div>
 
-  <!-- Scripts -->
   <script>
-    const currentYear = new Date().getFullYear();
-    document.getElementById("year-heading").textContent = currentYear;
-
-    function goHome() {
-      window.location.href = "index.html";
-    }
-
-    const rainContainer = document.querySelector('.neon-rain');
-    for (let i = 0; i < 80; i++) {
-      const drop = document.createElement('div');
-      drop.classList.add('drop');
-      drop.style.left = `${Math.random() * 100}vw`;
-      drop.style.animationDuration = `${1 + Math.random() * 2}s`;
-      drop.style.animationDelay = `${Math.random() * 5}s`;
-      rainContainer.appendChild(drop);
-    }
+    document.getElementById("year-heading").textContent = new Date().getFullYear();
   </script>
 
 </body>

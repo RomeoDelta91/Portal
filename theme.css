@@ -1,0 +1,223 @@
+/* ============================================================
+   DESIGN SYSTEM — Unit Klimatologie Suriname
+   Professional dark-navy climate dashboard theme
+   ============================================================ */
+
+:root {
+  /* --- Backgrounds --- */
+  --bg-base:    #0D1B2A;
+  --bg-surface: #122035;
+  --bg-raised:  #192C46;
+  --bg-overlay: #1F3550;
+
+  /* --- Borders --- */
+  --border-subtle:  #1A3050;
+  --border-default: #264870;
+  --border-active:  #2E65A0;
+
+  /* --- Accent colours --- */
+  --blue:       #1E72B8;
+  --blue-light: #3A91D4;
+  --teal:       #0891B2;
+  --teal-light: #22B8CF;
+  --amber:      #B45309;
+  --amber-light:#F59E0B;
+
+  /* --- Text --- */
+  --text-primary:   #E8EDF4;
+  --text-secondary: #8FA5C0;
+  --text-muted:     #546E8A;
+
+  /* --- Status --- */
+  --success: #059669;
+  --warning: #D97706;
+  --danger:  #DC2626;
+  --info:    #0891B2;
+
+  /* --- Spacing --- */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-10: 40px;
+  --space-12: 48px;
+  --space-16: 64px;
+
+  /* --- Radius --- */
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+
+  /* --- Shadows --- */
+  --shadow-card: 0 2px 8px rgba(0,0,0,0.4);
+  --shadow-modal: 0 8px 32px rgba(0,0,0,0.6);
+
+  /* --- Transitions --- */
+  --transition: 180ms ease;
+}
+
+/* --- Base reset --- */
+*, *::before, *::after { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  background-color: var(--bg-base);
+  color: var(--text-primary);
+  line-height: 1.6;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+a { color: var(--blue-light); text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+h1, h2, h3, h4 {
+  margin: 0 0 var(--space-4);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  color: var(--text-primary);
+}
+
+h1 { font-size: 2.4rem; line-height: 1.15; }
+h2 { font-size: 1.6rem; }
+h3 { font-size: 1.2rem; }
+
+p { margin: 0 0 var(--space-4); color: var(--text-secondary); }
+
+/* --- Utility classes --- */
+.text-muted    { color: var(--text-muted); }
+.text-secondary{ color: var(--text-secondary); }
+
+/* --- Shared button styles --- */
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  background-color: var(--blue);
+  color: #fff;
+  border: 1px solid transparent;
+  padding: 12px 24px;
+  font-size: 1rem;
+  font-weight: 600;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: background-color var(--transition), transform var(--transition);
+  text-decoration: none;
+}
+.btn-primary:hover {
+  background-color: var(--blue-light);
+  transform: translateY(-1px);
+  text-decoration: none;
+  color: #fff;
+}
+
+.btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  background-color: transparent;
+  color: var(--text-secondary);
+  border: 1px solid var(--border-default);
+  padding: 12px 24px;
+  font-size: 1rem;
+  font-weight: 500;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: border-color var(--transition), color var(--transition);
+  text-decoration: none;
+}
+.btn-secondary:hover {
+  border-color: var(--border-active);
+  color: var(--text-primary);
+  text-decoration: none;
+}
+
+.btn-ghost {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  background: transparent;
+  color: var(--text-secondary);
+  border: none;
+  padding: 8px 16px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: background-color var(--transition), color var(--transition);
+  text-decoration: none;
+}
+.btn-ghost:hover {
+  background-color: var(--bg-raised);
+  color: var(--text-primary);
+  text-decoration: none;
+}
+
+/* --- Back link --- */
+.back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+  font-weight: 500;
+  transition: color var(--transition);
+  text-decoration: none;
+  margin-bottom: var(--space-8);
+}
+.back-link::before { content: '←'; }
+.back-link:hover { color: var(--text-primary); text-decoration: none; }
+
+/* --- Card component --- */
+.card {
+  background-color: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  padding: var(--space-6);
+  transition: border-color var(--transition), transform var(--transition);
+}
+.card:hover {
+  border-color: var(--border-default);
+  transform: translateY(-2px);
+}
+
+/* --- Section divider --- */
+.section-divider {
+  border: none;
+  border-top: 1px solid var(--border-subtle);
+  margin: var(--space-8) 0;
+}
+
+/* --- Topbar (shared across pages) --- */
+.topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-4) var(--space-10);
+  border-bottom: 1px solid var(--border-subtle);
+  background-color: var(--bg-surface);
+}
+.topbar-brand {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+/* --- Page wrapper --- */
+.page-wrapper {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: var(--space-12) var(--space-10);
+}
+
+@media (max-width: 768px) {
+  .page-wrapper { padding: var(--space-8) var(--space-4); }
+  h1 { font-size: 1.75rem; }
+  h2 { font-size: 1.35rem; }
+}

@@ -1,66 +1,74 @@
-body {
-  margin: 0;
-  font-family: 'Segoe UI', sans-serif;
-  background: linear-gradient(to bottom right, #660066, #330099);
-  color: white;
-  overflow-x: hidden;
-}
+@import url('theme.css');
+
+/* ============================================================
+   OBSERVER LOGIN
+   ============================================================ */
 
 .container {
-  padding: 60px 40px;
-  box-sizing: border-box;
+  max-width: 640px;
+  margin: 0 auto;
+  padding: var(--space-16) var(--space-10);
   text-align: center;
 }
 
 h1 {
-  font-size: 48px;
-  text-shadow: 0 0 16px #cc99ff;
-  margin-bottom: 20px;
+  font-size: 2rem;
+  margin-bottom: var(--space-4);
 }
 
 .intro {
-  font-size: 20px;
-  line-height: 1.6;
-  background-color: rgba(255, 255, 255, 0.05);
-  padding: 24px;
-  border-radius: 12px;
-  box-shadow: 0 0 24px rgba(255, 255, 255, 0.2);
-  margin-bottom: 40px;
+  font-size: 0.95rem;
+  line-height: 1.7;
+  color: var(--text-secondary);
+  background-color: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  border-left: 3px solid var(--blue);
+  padding: var(--space-4) var(--space-5);
+  border-radius: 0 var(--radius-md) var(--radius-md) 0;
+  text-align: left;
+  margin-bottom: var(--space-8);
 }
 
 .login-btn {
-  display: inline-block;
-  background-color: #cc99ff;
-  color: #330033;
-  padding: 14px 28px;
-  font-size: 20px;
-  border-radius: 10px;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  background-color: var(--blue);
+  color: #fff;
+  padding: 12px 28px;
+  font-size: 1rem;
+  font-weight: 600;
+  border-radius: var(--radius-md);
   text-decoration: none;
-  font-weight: bold;
-  box-shadow: 0 0 14px #cc99ff;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  transition: background-color var(--transition), transform var(--transition);
 }
-
 .login-btn:hover {
-  background-color: #ffccff;
-  transform: scale(1.05);
-  box-shadow: 0 0 24px #ffccff;
+  background-color: var(--blue-light);
+  transform: translateY(-1px);
+  text-decoration: none;
+  color: #fff;
 }
 
 button {
-  margin-top: 40px;
-  background-color: #663399;
-  color: white;
-  border: none;
-  padding: 14px 28px;
-  font-size: 18px;
-  border-radius: 10px;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  margin-top: var(--space-6);
+  background-color: var(--bg-raised);
+  color: var(--text-secondary);
+  border: 1px solid var(--border-default);
+  padding: 10px 20px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  border-radius: var(--radius-md);
   cursor: pointer;
-  box-shadow: 0 0 14px #cc99ff;
-  transition: transform 0.3s, box-shadow 0.3s;
+  transition: border-color var(--transition), color var(--transition);
+}
+button:hover {
+  border-color: var(--border-active);
+  color: var(--text-primary);
 }
 
-button:hover {
-  box-shadow: 0 0 28px #ffccff;
-  transform: scale(1.05);
+@media (max-width: 768px) {
+  .container { padding: var(--space-10) var(--space-5); }
 }

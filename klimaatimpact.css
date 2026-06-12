@@ -1,102 +1,102 @@
+@import url('theme.css');
+
+/* ============================================================
+   KLIMAATIMPACT — Climate impact detail page
+   ============================================================ */
+
 body {
-  margin: 0;
-  font-family: 'Segoe UI', sans-serif;
-  background: linear-gradient(to bottom right, #003344, #3399ff);
-  color: white;
-  padding: 80px;
+  padding: 0;
+  text-align: left;
+}
+
+.back-button {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  color: var(--text-secondary);
+  font-size: 0.875rem;
+  font-weight: 500;
+  text-decoration: none;
+  margin-bottom: var(--space-8);
+  transition: color var(--transition);
+}
+.back-button::before { content: '←'; }
+.back-button:hover { color: var(--text-primary); text-decoration: none; }
+
+.page-content {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: var(--space-10) var(--space-10);
   text-align: center;
 }
 
 h1 {
-  font-size: 48px;
-  margin-bottom: 20px;
-  text-shadow: 0 0 14px #00ffff;
+  font-size: 2.25rem;
+  margin-bottom: var(--space-4);
 }
 
 .intro {
-  font-size: 20px;
-  line-height: 1.6;
-  max-width: 800px;
-  margin: 0 auto 40px auto;
-  background-color: rgba(255, 255, 255, 0.08);
-  padding: 24px;
-  border-radius: 12px;
-  box-shadow: 0 0 24px rgba(0, 255, 255, 0.3);
-  animation: fadeIn 0.6s ease-in-out;
-}
-
-.back-button {
-  display: inline-block;
-  margin-bottom: 30px;
-  font-size: 20px;
-  color: #00e6ff;
-  text-decoration: none;
-  text-shadow: 0 0 10px #00ffff;
-  transition: 0.2s;
-}
-
-.back-button:hover {
-  transform: translateX(-4px);
+  font-size: 0.95rem;
+  line-height: 1.75;
+  color: var(--text-secondary);
+  background-color: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  border-left: 3px solid var(--amber-light);
+  padding: var(--space-4) var(--space-5);
+  border-radius: 0 var(--radius-md) var(--radius-md) 0;
+  max-width: 720px;
+  margin: 0 auto var(--space-10);
+  text-align: left;
 }
 
 .impact-grid {
-  display: flex;
-  justify-content: center;
-  gap: 40px;
-  flex-wrap: wrap;
-  margin-top: 40px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: var(--space-4);
+  margin-top: var(--space-6);
+  justify-items: stretch;
 }
 
 .impact-card {
-  background: rgba(255, 255, 255, 0.12);
-  width: 260px;
-  padding: 30px;
-  border-radius: 16px;
+  background-color: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  padding: var(--space-6) var(--space-5);
   text-decoration: none;
-  color: white;
-  box-shadow: 0 0 20px rgba(0, 255, 255, 0.25);
-  transition: 0.25s;
-  backdrop-filter: blur(6px);
+  color: var(--text-secondary);
+  transition: border-color var(--transition), transform var(--transition), color var(--transition);
+  backdrop-filter: none;
+  text-align: left;
 }
 
 .impact-card:hover {
-  transform: translateY(-8px);
-  box-shadow: 0 0 30px rgba(0, 255, 255, 0.45);
+  transform: translateY(-3px);
+  border-color: var(--border-active);
+  color: var(--text-primary);
+  text-decoration: none;
 }
 
 .icon {
-  font-size: 60px;
-  margin-bottom: 12px;
-  text-shadow: 0 0 12px #00ffff;
+  font-size: 1.75rem;
+  margin-bottom: var(--space-3);
+  text-shadow: none;
+  display: block;
 }
 
 .title {
-  font-size: 22px;
-  font-weight: bold;
-  margin-bottom: 8px;
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: var(--space-2);
 }
 
 .desc {
-  font-size: 15px;
-  opacity: 0.9;
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  line-height: 1.5;
 }
 
-/* Mobile */
-@media screen and (max-width: 768px) {
-  body {
-    padding: 20px;
-  }
-
-  h1 {
-    font-size: 36px;
-  }
-
-  .impact-grid {
-    flex-direction: column;
-    gap: 30px;
-  }
-
-  .impact-card {
-    width: 100%;
-  }
+@media (max-width: 768px) {
+  .page-content { padding: var(--space-8) var(--space-5); }
+  .impact-grid { grid-template-columns: 1fr; }
 }

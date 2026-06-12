@@ -1,233 +1,176 @@
-body {
-  margin: 0;
-  font-family: 'Segoe UI', sans-serif;
-  background: linear-gradient(to bottom right, #2e003e, #ff6600);
-  color: white;
-  overflow-x: hidden;
+@import url('theme.css');
+
+/* ============================================================
+   INDEX — Landing page
+   ============================================================ */
+
+html, body { height: 100%; }
+
+.topbar {
+  position: sticky;
+  top: 0;
+  z-index: 10;
 }
 
-.container {
-  display: flex;
-  justify-content: space-between;
+.hero {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-16);
   align-items: center;
-  padding: 80px;
-  height: 100vh;
-  box-sizing: border-box;
+  min-height: calc(100vh - 65px);
+  padding: var(--space-16) var(--space-10);
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
-.left {
-  width: 50%;
-  padding-right: 60px;
-  perspective: 1200px;
-}
+.hero-left { max-width: 540px; }
 
-h1 {
-  font-size: 56px;
-  margin-bottom: 30px;
-  text-shadow: 0 0 14px #ff00ff;
-}
-
-#intro {
-  transform: translateX(-120%);
-  opacity: 0;
-  animation: slideInLeft 1.8s forwards;
-  animation-delay: 0.6s;
-  background-color: rgba(255, 255, 255, 0.05);
-  padding: 28px;
-  border-radius: 14px;
-  box-shadow: 0 0 24px rgba(255, 255, 255, 0.2);
-  transition: box-shadow 0.3s;
-}
-
-#intro:hover {
-  box-shadow: 0 0 40px rgba(255, 255, 255, 0.4);
-}
-
-@keyframes slideInLeft {
-  to {
-    transform: translateX(0);
-    opacity: 1;
-  }
-}
-
-/* Explore-knop blijft block */
-button {
-  display: block;
-  margin-top: 50px;
-  background-color: #FF4500;
-  color: white;
-  border: none;
-  padding: 18px 36px;
-  font-size: 22px;
-  border-radius: 12px;
-  cursor: pointer;
-  box-shadow: 0 0 14px #FF4500;
-  transition: transform 0.3s, box-shadow 0.3s;
-}
-
-button:hover {
-  transform: scale(1.1) rotateX(6deg);
-  box-shadow: 0 0 28px #FF6347;
-}
-
-/* Home-knop exact zo breed als de tekst */
-.home-btn {
+.institution-tag {
   display: inline-block;
-  margin-top: 20px;
-  padding: 10px 16px;
-  background-color: #ffcc33;
-  color: #4a2a6a;
-  border-radius: 10px;
-  text-decoration: none;
+  font-size: 0.75rem;
   font-weight: 600;
-  font-size: 20px;
-  box-shadow: 0 0 14px rgba(255, 204, 51, 0.6);
-  transition: transform 0.3s, background-color 0.3s, box-shadow 0.3s;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--teal-light);
+  background-color: rgba(8, 145, 178, 0.12);
+  border: 1px solid rgba(8, 145, 178, 0.25);
+  padding: 4px 12px;
+  border-radius: 100px;
+  margin-bottom: var(--space-6);
 }
 
-.home-btn:hover {
-  background-color: #ffd966;
-  transform: scale(1.05);
-  box-shadow: 0 0 24px rgba(255, 204, 51, 0.9);
+.hero-title {
+  font-size: 3rem;
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: -0.03em;
+  margin-bottom: var(--space-2);
+  color: var(--text-primary);
 }
 
-.right {
-  width: 50%;
+.hero-subtitle {
+  font-size: 1.25rem;
+  font-weight: 400;
+  color: var(--text-muted);
+  margin-bottom: var(--space-8);
+}
+
+.hero-desc {
+  font-size: 0.975rem;
+  line-height: 1.7;
+  color: var(--text-secondary);
+  background-color: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  border-left: 3px solid var(--teal);
+  padding: var(--space-5) var(--space-6);
+  border-radius: 0 var(--radius-md) var(--radius-md) 0;
+  margin-bottom: var(--space-8);
+}
+
+.hero-actions {
   display: flex;
-  flex-direction: column;
-  gap: 50px;
-  justify-content: center;
-  align-items: center;
+  gap: var(--space-4);
+  flex-wrap: wrap;
 }
 
-.icon {
-  font-size: 108px;
-  width: 180px;
-  height: 180px;
-  border-radius: 50%;
-  background-color: rgba(255, 255, 255, 0.08);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  box-shadow: 0 0 28px rgba(255, 255, 255, 0.3);
-  animation: bounceFloat 2.5s ease-in-out infinite;
-  transition: transform 0.4s, box-shadow 0.4s;
+/* --- Stats grid (right column) --- */
+.stats-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-4);
 }
 
-.icon:hover {
-  transform: scale(1.35) rotateY(25deg);
-  box-shadow: 0 0 48px rgba(255, 255, 255, 0.6);
+.stat-card {
+  background-color: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  padding: var(--space-6);
+  transition: border-color var(--transition);
 }
 
-@keyframes bounceFloat {
-  0%   { transform: translateY(0px) scale(1); }
-  25%  { transform: translateY(-20px) scale(1.05); }
-  50%  { transform: translateY(0px) scale(1); }
-  75%  { transform: translateY(-12px) scale(1.03); }
-  100% { transform: translateY(0px) scale(1); }
+.stat-card:hover { border-color: var(--border-default); }
+
+.stat-label {
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: var(--space-2);
 }
 
-@media screen and (max-width: 768px) {
-  body {
-    font-size: 16px;
-    padding: 0;
-    margin: 0;
-    overflow-x: hidden;
-  }
-
-  .container {
-    flex-direction: column;
-    padding: 40px 20px;
-    height: auto;
-  }
-
-  .left, .right, .contact-container, .connectie-container {
-    width: 100%;
-    padding: 0;
-    text-align: center;
-  }
-
-  h1 {
-    font-size: 36px;
-    margin-bottom: 20px;
-  }
-
-  #intro, .intro {
-    font-size: 18px;
-    padding: 20px;
-    margin-bottom: 20px;
-  }
-
-  button, .back-button, .contact-options button, .quick-form button {
-    font-size: 16px;
-    padding: 12px 24px;
-    margin-top: 20px;
-  }
-
-  .worlds {
-    width: 100%;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 30px;
-    margin-top: 40px;
-  }
-
-  .world {
-    width: 100px;
-    height: 100px;
-    font-size: 48px;
-  }
-
-  .label {
-    font-size: 14px;
-    bottom: -24px;
-  }
-
-  .quick-form, .email-popup {
-    width: 100%;
-    max-width: 90%;
-    margin: 0 auto;
-    font-size: 16px;
-  }
+.stat-value {
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  letter-spacing: -0.02em;
+  margin-bottom: var(--space-1);
 }
 
-/* -------------------------------------------------- */
-/* 🔵 POPUP CSS TOEGEVOEGD — NIETS VAN JOUW CSS AANGEPAST */
-/* -------------------------------------------------- */
+.stat-sub {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+}
 
+.stat-card:nth-child(1) { border-top: 2px solid var(--teal); }
+.stat-card:nth-child(2) { border-top: 2px solid var(--blue); }
+.stat-card:nth-child(3) { border-top: 2px solid var(--amber-light); }
+.stat-card:nth-child(4) { border-top: 2px solid var(--success); }
+
+/* --- Popup (rainfall map) --- */
 .kaart-popup {
   display: none;
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0,0,0,0.6);
+  inset: 0;
+  background: rgba(0, 0, 0, 0.7);
   justify-content: center;
   align-items: center;
   z-index: 9999;
 }
 
 .kaart-popup-content {
-  background: white;
-  padding: 10px;
-  border-radius: 8px;
+  background: var(--bg-surface);
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-lg);
+  padding: var(--space-4);
   width: 90%;
   max-width: 900px;
-  height: 80%;
+  height: 80vh;
   position: relative;
 }
 
 .kaart-iframe {
   width: 100%;
   height: 100%;
+  object-fit: contain;
   border: none;
+  border-radius: var(--radius-md);
 }
 
 .close-popup {
   position: absolute;
-  top: 8px;
-  right: 12px;
-  font-size: 28px;
+  top: 10px;
+  right: 14px;
+  font-size: 1.5rem;
   cursor: pointer;
-  color: black;
+  color: var(--text-secondary);
+  line-height: 1;
+  transition: color var(--transition);
+}
+.close-popup:hover { color: var(--text-primary); }
+
+/* --- Responsive --- */
+@media (max-width: 900px) {
+  .hero {
+    grid-template-columns: 1fr;
+    min-height: auto;
+    padding: var(--space-10) var(--space-6);
+  }
+  .hero-left { max-width: 100%; }
+  .hero-title { font-size: 2.25rem; }
+}
+
+@media (max-width: 480px) {
+  .stats-grid { grid-template-columns: 1fr; }
+  .hero-title { font-size: 1.9rem; }
 }

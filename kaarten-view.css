@@ -1,168 +1,170 @@
-body {
-  margin: 0;
-  font-family: 'Segoe UI', sans-serif;
-  background: linear-gradient(to bottom right, #660066, #330099);
-  color: white;
-  overflow-x: hidden;
-}
+@import url('theme.css');
+
+/* ============================================================
+   KAARTEN VIEW — Map gallery with popup
+   ============================================================ */
 
 .container {
-  padding: 60px 40px;
-  box-sizing: border-box;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: var(--space-10) var(--space-10);
   text-align: center;
 }
 
 h1 {
-  font-size: 48px;
-  text-shadow: 0 0 16px #cc99ff;
-  margin-bottom: 20px;
+  font-size: 2.25rem;
+  margin-bottom: var(--space-2);
 }
 
 .intro {
-  font-size: 20px;
-  line-height: 1.6;
-  background-color: rgba(255, 255, 255, 0.05);
-  padding: 24px;
-  border-radius: 12px;
-  box-shadow: 0 0 24px rgba(255, 255, 255, 0.2);
-  margin-bottom: 40px;
+  font-size: 0.95rem;
+  line-height: 1.75;
+  color: var(--text-secondary);
+  background-color: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  border-left: 3px solid var(--blue);
+  padding: var(--space-4) var(--space-5);
+  border-radius: 0 var(--radius-md) var(--radius-md) 0;
+  max-width: 760px;
+  margin: 0 auto var(--space-10);
+  text-align: left;
 }
 
 .kaart-gallery {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 30px;
-  justify-items: center;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: var(--space-6);
+  justify-items: stretch;
 }
 
 .kaart-item {
-  background-color: rgba(255, 255, 255, 0.05);
-  padding: 20px;
-  border-radius: 12px;
-  box-shadow: 0 0 18px rgba(255, 255, 255, 0.2);
-  transition: transform 0.3s;
+  background-color: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  padding: var(--space-4);
+  border-radius: var(--radius-lg);
+  transition: border-color var(--transition), transform var(--transition);
   position: relative;
+  cursor: pointer;
 }
 
 .kaart-item:hover {
-  transform: scale(1.05);
-  box-shadow: 0 0 28px #cc99ff;
+  transform: translateY(-3px);
+  border-color: var(--border-default);
 }
 
 .kaart-item img {
   max-width: 100%;
-  border-radius: 8px;
-  transition: transform 0.3s ease;
-  cursor: pointer;
-}
-
-.kaart-item:hover img {
-  transform: scale(1.2);
-  z-index: 2;
+  border-radius: var(--radius-md);
+  display: block;
 }
 
 .kaart-item p {
-  margin-top: 12px;
-  font-size: 18px;
+  margin-top: var(--space-3);
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--text-primary);
 }
 
 .download-btn {
-  display: inline-block;
-  margin-top: 10px;
-  background-color: #cc99ff;
-  color: #330033;
-  padding: 8px 16px;
-  border-radius: 8px;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+  margin-top: var(--space-2);
+  background-color: var(--bg-raised);
+  color: var(--text-secondary);
+  border: 1px solid var(--border-default);
+  padding: 6px 14px;
+  border-radius: var(--radius-md);
   text-decoration: none;
-  font-weight: bold;
-  box-shadow: 0 0 10px #cc99ff;
-  transition: transform 0.3s ease;
+  font-size: 0.8rem;
+  font-weight: 500;
+  transition: color var(--transition), border-color var(--transition);
 }
-
 .download-btn:hover {
-  transform: scale(1.1);
-  background-color: #ffccff;
+  color: var(--text-primary);
+  border-color: var(--border-active);
+  text-decoration: none;
 }
 
-/* Popup styles */
+/* --- Popup --- */
 .popup {
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  background-color: rgba(30, 30, 30, 0.95);
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.82);
   display: none;
   z-index: 999;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  animation: fadeIn 0.4s ease;
+  animation: fadeIn 0.2s ease;
 }
 
 .popup img {
-  max-width: 90vw;
+  max-width: 92vw;
   max-height: 80vh;
-  border-radius: 8px;
-  margin-bottom: 20px;
+  border-radius: var(--radius-md);
+  margin-bottom: var(--space-4);
+  display: block;
 }
 
 .popup-download {
-  background-color: #cc99ff;
-  color: #330033;
-  padding: 10px 20px;
-  border-radius: 8px;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  background-color: var(--blue);
+  color: #fff;
+  padding: 10px 22px;
+  border-radius: var(--radius-md);
   text-decoration: none;
-  font-weight: bold;
-  box-shadow: 0 0 12px #cc99ff;
-  transition: transform 0.3s ease;
+  font-weight: 600;
+  font-size: 0.9rem;
+  transition: background-color var(--transition);
 }
-
 .popup-download:hover {
-  background-color: #ffccff;
-  transform: scale(1.05);
+  background-color: var(--blue-light);
+  text-decoration: none;
+  color: #fff;
 }
 
 .close {
   position: absolute;
-  top: 20px;
-  right: 30px;
-  font-size: 48px;
-  color: #ff0000;
+  top: var(--space-5);
+  right: var(--space-6);
+  font-size: 1.75rem;
+  color: var(--text-secondary);
   cursor: pointer;
-  font-weight: bold;
-  text-shadow: 0 0 16px #ff6666;
-  transition: transform 0.3s ease;
+  font-weight: 300;
+  line-height: 1;
+  transition: color var(--transition);
 }
-
-.close:hover {
-  transform: scale(1.3);
-  color: #ff6666;
-}
+.close:hover { color: var(--text-primary); }
 
 @keyframes fadeIn {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
+  from { opacity: 0; }
+  to   { opacity: 1; }
 }
 
 button {
-  margin-top: 40px;
-  background-color: #663399;
-  color: white;
-  border: none;
-  padding: 14px 28px;
-  font-size: 18px;
-  border-radius: 10px;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  margin-top: var(--space-8);
+  background-color: var(--bg-raised);
+  color: var(--text-secondary);
+  border: 1px solid var(--border-default);
+  padding: 10px 20px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  border-radius: var(--radius-md);
   cursor: pointer;
-  box-shadow: 0 0 14px #cc99ff;
-  transition: transform 0.3s, box-shadow 0.3s;
+  transition: border-color var(--transition), color var(--transition);
+}
+button:hover {
+  border-color: var(--border-active);
+  color: var(--text-primary);
 }
 
-button:hover {
-  box-shadow: 0 0 28px #ffccff;
-  transform: scale(1.05);
+@media (max-width: 768px) {
+  .container { padding: var(--space-8) var(--space-5); }
+  .kaart-gallery { grid-template-columns: 1fr 1fr; }
 }

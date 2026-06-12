@@ -5,9 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Unit Klimatologie Suriname</title>
   <link rel="stylesheet" href="index.css" />
-  <link rel="stylesheet" href="popup.css" />
 
-  <!-- Google tag (gtag.js) -->
+  <!-- Google Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-QKPMD20CTB"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
@@ -16,38 +15,62 @@
     gtag('config', 'G-QKPMD20CTB');
   </script>
 </head>
-
 <body>
 
-  <!-- Popup container voor de kaart -->
+  <!-- Neerslagkaart popup -->
   <div id="kaartPopup" class="kaart-popup">
     <div class="kaart-popup-content">
-      <span class="close-popup" onclick="closeKaartPopup()">×</span>
-
-      <!-- Alleen de neerslagkaart tonen -->
-      <img src="docs/neerslagkaart.png" class="kaart-iframe" alt="Neerslagkaart Suriname">
+      <span class="close-popup" onclick="closeKaartPopup()" title="Sluiten">×</span>
+      <img src="docs/neerslagkaart.png" class="kaart-iframe" alt="Neerslagkaart Suriname" />
     </div>
   </div>
 
-  <div class="container">
-    <div class="left">
-      <h1>Unit Klimatologie Suriname</h1>
-      <div id="intro">
-        <p>
-          De Unit Klimatologie verzamelt, valideert en archiveert alle officiële waarnemingen in Suriname. Deze pagina biedt toegang tot geaccumuleerde meetgegevens, kaarten, grafieken en samenvattende rapporten. Ook modelresultaten en satellietbeelden worden gebruikt. De Unit werkt nauw samen met andere organisaties en internationale instituten zoals het KNMI, de WMO en CIMH.
-        </p>
+  <header class="topbar">
+    <span class="topbar-brand">Meteorologische Dienst Suriname</span>
+    <a href="https://hydromet.sr/" class="btn-ghost" target="_blank" rel="noopener">Hydromet.sr ↗</a>
+  </header>
+
+  <main class="hero">
+    <div class="hero-left">
+      <span class="institution-tag">Unit Klimatologie</span>
+      <h1 class="hero-title">Klimaatdata<br/>Suriname</h1>
+      <p class="hero-subtitle">Officieel dataportal — <span id="year"></span></p>
+      <div class="hero-desc">
+        De Unit Klimatologie verzamelt, valideert en archiveert alle officiële waarnemingen in Suriname.
+        Dit portaal biedt toegang tot meetgegevens, kaarten, grafieken en rapporten.
+        De Unit werkt samen met internationale instituten zoals het KNMI, de WMO en CIMH.
       </div>
-
-      <button onclick="explore()">Explore <span id="year"></span></button>
-      <a href="https://hydromet.sr/" class="home-btn">Terug naar Home: Hydromet.sr</a>
+      <div class="hero-actions">
+        <button class="btn-primary" onclick="explore()">Dashboard verkennen →</button>
+        <a href="https://hydromet.sr/" class="btn-secondary" target="_blank" rel="noopener">Hydromet.sr</a>
+      </div>
     </div>
 
-    <div class="right">
-      <div class="icon rain" title="Rain & Wind">🌧️</div>
-      <div class="icon sun" title="Sunlight">☀️</div>
-      <div class="icon data" title="Climate Data">📊</div>
+    <div class="hero-right">
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-label">Gem. temperatuur</div>
+          <div class="stat-value">27 °C</div>
+          <div class="stat-sub">Jaarlijks gemiddelde</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Jaarlijkse neerslag</div>
+          <div class="stat-value">~2200 mm</div>
+          <div class="stat-sub">Nationale gemiddelde</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Klimaattype</div>
+          <div class="stat-value">Af / Am / Aw</div>
+          <div class="stat-sub">Köppen-Geiger</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Seizoenen</div>
+          <div class="stat-value">4</div>
+          <div class="stat-sub">Op basis van ITCZ-positie</div>
+        </div>
+      </div>
     </div>
-  </div>
+  </main>
 
   <script src="index.js"></script>
   <script src="popup.js"></script>

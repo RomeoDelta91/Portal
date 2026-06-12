@@ -1,93 +1,54 @@
+@import url('theme.css');
+
+/* ============================================================
+   TOEKOMSTSCENARIO — Future climate scenarios
+   ============================================================ */
+
 body {
-  margin: 0;
-  font-family: 'Segoe UI', sans-serif;
-  background: linear-gradient(to bottom right, #002244, #00ccff);
-  color: white;
-  padding: 80px;
+  padding: var(--space-10);
   text-align: center;
 }
 
 h1 {
-  font-size: 48px;
-  margin-bottom: 20px;
-  text-shadow: 0 0 14px #00ffff;
+  font-size: 2.25rem;
+  margin-bottom: var(--space-4);
 }
 
 p {
-  font-size: 20px;
-  line-height: 1.6;
-  max-width: 800px;
-  margin: 0 auto;
-  background-color: rgba(255, 255, 255, 0.08);
-  padding: 24px;
-  border-radius: 12px;
-  box-shadow: 0 0 24px rgba(0, 255, 255, 0.3);
-  animation: fadeIn 0.6s ease-in-out;
+  font-size: 0.95rem;
+  line-height: 1.75;
+  color: var(--text-secondary);
+  max-width: 760px;
+  margin: 0 auto var(--space-8);
+  background-color: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  border-left: 3px solid var(--amber-light);
+  padding: var(--space-5) var(--space-6);
+  border-radius: 0 var(--radius-md) var(--radius-md) 0;
+  text-align: left;
+  animation: none;
 }
+
+.back-button {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  color: var(--text-secondary);
+  font-size: 0.875rem;
+  font-weight: 500;
+  text-decoration: none;
+  margin-bottom: var(--space-8);
+  transition: color var(--transition);
+}
+.back-button::before { content: '←'; }
+.back-button:hover { color: var(--text-primary); text-decoration: none; }
 
 @keyframes fadeIn {
-  from { opacity: 0; transform: translateY(20px); }
+  from { opacity: 0; transform: translateY(8px); }
   to   { opacity: 1; transform: translateY(0); }
 }
-@media screen and (max-width: 768px) {
-  body {
-    font-size: 16px;
-    padding: 0;
-    margin: 0;
-    overflow-x: hidden;
-  }
 
-  .container {
-    flex-direction: column;
-    padding: 40px 20px;
-    height: auto;
-  }
-
-  .left, .right, .contact-container, .connectie-container {
-    width: 100%;
-    padding: 0;
-    text-align: center;
-  }
-
-  h1 {
-    font-size: 36px;
-    margin-bottom: 20px;
-  }
-
-  #intro, .intro {
-    font-size: 18px;
-    padding: 20px;
-    margin-bottom: 20px;
-  }
-
-  button, .back-button, .contact-options button, .quick-form button {
-    font-size: 16px;
-    padding: 12px 24px;
-    margin-top: 20px;
-  }
-
-  .worlds {
-    width: 100%;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 30px;
-    margin-top: 40px;
-  }
-
-  .world {
-    width: 100px;
-    height: 100px;
-    font-size: 48px;
-  }
-
-  .label {
-    font-size: 14px;
-    bottom: -24px;
-  }
-
-  .quick-form, .email-popup {
-    width: 100%;
-    max-width: 90%;
-    margin: 0 auto;
-    font-size: 16px;
-  }
+@media (max-width: 768px) {
+  body { padding: var(--space-8) var(--space-5); }
+  h1 { font-size: 1.75rem; }
 }

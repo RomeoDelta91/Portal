@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Klimaatnormalen</title>
 
-  <!-- Google tag (gtag.js) -->
+  <!-- Google Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-QKPMD20CTB"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
@@ -14,76 +14,65 @@
     gtag('config', 'G-QKPMD20CTB');
   </script>
 
-  <!-- BELANGRIJK: juiste CSS -->
   <link rel="stylesheet" href="klimaatnormalen.css" />
 </head>
-
 <body>
 
-  <button class="back-btn" onclick="goBack()">← Ga terug naar Klimaat in het Verleden</button>
+  <button class="back-btn" onclick="goBack()">Terug naar Klimaat in het Verleden</button>
 
   <div class="container">
     <h1 class="header">Klimaatnormalen</h1>
-
     <p class="intro">
-      De klimaatnormalen geven een overzicht van de gemiddelde klimatologische waarden 
-      over een periode van <strong>30 jaar of meer</strong>.  
-      Kies hieronder een element om het bijbehorende dashboard te openen.  
-      Op elke pagina kun je zelf het <strong>station</strong>, de <strong>periode</strong> 
-      en het <strong>type grafiek</strong> (staafdiagram, matrix, tabel, enz.) selecteren.
+      De klimaatnormalen geven een overzicht van de gemiddelde klimatologische waarden over een periode van
+      <strong>30 jaar of meer</strong>. Kies hieronder een element om het bijbehorende dashboard te openen.
+      Op elke pagina kun je zelf het <strong>station</strong>, de <strong>periode</strong>
+      en het <strong>type grafiek</strong> selecteren.
     </p>
   </div>
 
   <div class="animation-zone">
-    <div class="element-core">ELEMENT</div>
-
+    <div class="element-core"></div>
     <div class="element-buttons">
 
-      <!-- Alle knoppen met correcte ID’s -->
       <button class="btn" id="neerslag"
         onclick="window.open('https://suriname-rainfall-analysis-vk9eyokjspdofwd3tnbvqz.streamlit.app/', '_blank')">
-        🌧️ Neerslag
+        Neerslag
       </button>
 
-
       <button class="btn" id="temperatuur" onclick="navigateTo('kn_temperatuur.html')">
-        🌡️ Temperatuur
+        Temperatuur
       </button>
 
       <button class="btn" id="windrichting" onclick="navigateTo('kn_windrichting.html')">
-        🧭 Windrichting
+        Windrichting
       </button>
 
       <button class="btn" id="windsnelheid" onclick="navigateTo('kn_windsnelheid.html')">
-        💨 Windsnelheid
+        Windsnelheid
       </button>
 
       <button class="btn" id="vochtigheid" onclick="navigateTo('kn_vochtigheid.html')">
-        💧 Relatieve vochtigheid
+        Relatieve vochtigheid
       </button>
 
       <button class="btn" id="druk" onclick="navigateTo('kn_druk.html')">
-        📉 Druk
+        Luchtdruk
       </button>
 
       <button class="btn" id="zonneuren" onclick="navigateTo('kn_zonneschijn.html')">
-        ☀️ Zonne-uren
+        Zonne-uren
       </button>
 
       <button class="btn" id="solarradiation" onclick="navigateTo('kn_solarradiation.html')">
-        🔆 Solar radiation
+        Zonnestraling
       </button>
 
     </div>
   </div>
 
   <script>
-    function navigateTo(page) {
-      window.location.href = page;
-    }
-    function goBack() {
-      window.location.href = "verleden.html";
-    }
+    function navigateTo(page) { window.location.href = page; }
+    function goBack() { window.location.href = "verleden.html"; }
   </script>
 
 </body>
