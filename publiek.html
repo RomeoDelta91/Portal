@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Publieke Connectie</title>
+  <link rel="stylesheet" href="publiek.css" />
+</head>
+
+<body>
+
+  <div class="connectie-container">
+
+    <a href="explore.html" class="back-button">
+      🧭 Terug naar Explore <span id="explore-year"></span>
+    </a>
+
+    <h1>📨 Publieke Connectie</h1>
+
+    <p class="intro">
+      Deze page verbindt burgers, scholen en organisaties met de Unit Klimatologie.<br />
+      Kies een optie hieronder om te communiceren of een melding te doen.
+    </p>
+
+    <div class="modules">
+
+      <div class="module" onclick="window.location.href='meldpunt.html'">
+        🛎️<span class="label">Meldpunt</span>
+      </div>
+
+      <div class="module" onclick="window.location.href='contact.html'">
+        📬<span class="label">Contact Us</span>
+      </div>
+
+    </div>
+
+  </div>
+
+  <script>
+    document.getElementById("explore-year").textContent = new Date().getFullYear();
+  </script>
+
+</body>
+</html>

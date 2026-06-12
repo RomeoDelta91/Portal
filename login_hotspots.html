@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rainfall Hotspot Login</title>
+  <link rel="stylesheet" href="explore.css">
+
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background: radial-gradient(circle at 20% 20%, #0a0f1f, #000);
+      font-family: 'Segoe UI', sans-serif;
+      color: white;
+      overflow: hidden;
+    }
+
+    .glow-dot {
+      position: absolute;
+      width: 6px;
+      height: 6px;
+      background: #00c3ff;
+      border-radius: 50%;
+      box-shadow: 0 0 12px #00c3ff;
+      animation: float 6s infinite ease-in-out;
+      opacity: 0.7;
+    }
+
+    @keyframes float {
+      0% { transform: translateY(0px); }
+      50% { transform: translateY(-20px); }
+      100% { transform: translateY(0px); }
+    }
+
+    .login-box {
+      width: 360px;
+      margin: 140px auto;
+      padding: 35px;
+      background: rgba(255,255,255,0.08);
+      border-radius: 14px;
+      backdrop-filter: blur(12px);
+      box-shadow: 0 0 25px rgba(0, 195, 255, 0.3);
+      text-align: center;
+      animation: fadeIn 1.2s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .login-box h2 {
+      margin-bottom: 10px;
+      font-size: 26px;
+      letter-spacing: 1px;
+      text-shadow: 0 0 10px #00c3ff;
+    }
+
+    .login-box p {
+      font-size: 14px;
+      opacity: 0.8;
+    }
+
+    .login-input {
+      width: 90%;
+      padding: 12px;
+      margin-top: 20px;
+      border-radius: 8px;
+      border: none;
+      background: rgba(255,255,255,0.2);
+      color: white;
+      font-size: 15px;
+      outline: none;
+      box-shadow: inset 0 0 8px rgba(0,0,0,0.4);
+    }
+
+    .login-btn {
+      margin-top: 25px;
+      padding: 12px 20px;
+      width: 95%;
+      border: none;
+      border-radius: 8px;
+      background: linear-gradient(90deg, #00c3ff, #7a5cff);
+      color: black;
+      font-weight: bold;
+      cursor: pointer;
+      font-size: 15px;
+      box-shadow: 0 0 12px #00c3ff;
+      transition: 0.2s;
+    }
+
+    .login-btn:hover {
+      transform: scale(1.03);
+      box-shadow: 0 0 18px #7a5cff;
+    }
+
+    .error {
+      color: #ff6b6b;
+      margin-top: 15px;
+      font-size: 14px;
+      display: none;
+    }
+  </style>
+</head>
+
+<body>
+
+<!-- 🔙 BACK BUTTON (enige toevoeging) -->
+<a href="/mds_upload/Dashboard_Klimatologie/explore.html" style="
+  position:absolute;
+  top:20px;
+  left:20px;
+  padding:10px 16px;
+  background:#00c3ff;
+  color:black;
+  font-weight:bold;
+  border-radius:8px;
+  text-decoration:none;
+  box-shadow:0 0 12px rgba(0,195,255,0.5);
+  z-index:9999;
+">
+  ← Terug naar Explore
+</a>
+
+<script>
+  for (let i = 0; i < 25; i++) {
+    const dot = document.createElement("div");
+    dot.className = "glow-dot";
+    dot.style.left = Math.random() * 100 + "vw";
+    dot.style.top = Math.random() * 100 + "vh";
+    dot.style.animationDelay = (Math.random() * 5) + "s";
+    document.body.appendChild(dot);
+  }
+</script>
+
+<div class="login-box">
+  <h2>Rainfall Hotspot Monitor</h2>
+  <p>Voer de toegangscode in om verder te gaan.</p>
+
+  <input type="password" id="hotspotpass" class="login-input" placeholder="Toegangscode">
+
+  <button onclick="checkHotspot()" class="login-btn">Inloggen</button>
+
+  <p id="error" class="error">Onjuiste code.</p>
+</div>
+
+<script>
+function checkHotspot() {
+  const pw = document.getElementById("hotspotpass").value;
+  if (pw === "Hotspot2026") {
+    window.location.href = "/mds_upload/Dashboard_Klimatologie/rainfall_hotspots.html";
+  } else {
+    document.getElementById("error").style.display = "block";
+  }
+}
+</script>
+
+</body>
+</html>

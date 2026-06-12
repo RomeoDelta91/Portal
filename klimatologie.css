@@ -1,0 +1,249 @@
+body {
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background: linear-gradient(to bottom right, #003366, #3399ff);
+  color: white;
+}
+
+.klimaat-container {
+  padding: 80px;
+  text-align: center;
+}
+
+h1 {
+  font-size: 52px;
+  margin-bottom: 20px;
+  text-shadow: 0 0 14px #00ffff;
+}
+
+.intro {
+  font-size: 20px;
+  margin-bottom: 60px;
+  line-height: 1.6;
+}
+
+.modules {
+  display: flex;
+  justify-content: center;
+  gap: 60px;
+  flex-wrap: wrap;
+  margin-bottom: 40px;
+}
+
+.module {
+  position: relative;
+  font-size: 72px;
+  width: 140px;
+  height: 140px;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 24px rgba(255, 255, 255, 0.3);
+  animation: pulseFade 3s ease-in-out infinite;
+  transition: transform 0.4s, box-shadow 0.4s;
+  cursor: pointer;
+}
+
+.module:hover {
+  transform: scale(1.2) rotateY(20deg);
+  box-shadow: 0 0 36px rgba(255, 255, 255, 0.6);
+}
+
+.label {
+  position: absolute;
+  bottom: -28px;
+  background-color: rgba(255, 255, 255, 0.1);
+  color: white;
+  padding: 6px 12px;
+  border-radius: 8px;
+  font-size: 16px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.4s ease, transform 0.4s ease;
+  transform: translateY(10px);
+  white-space: nowrap;
+  text-align: center;
+}
+
+.module:hover .label {
+  opacity: 1;
+  transform: translateY(0);
+  box-shadow: 0 0 12px rgba(255, 255, 255, 0.4);
+}
+
+.klimaat-info {
+  max-width: 900px;
+  margin: 0 auto;
+  text-align: left;
+  font-size: 18px;
+  line-height: 1.6;
+  animation: fadeIn 0.6s ease-in-out;
+}
+
+.klimaat-info h2 {
+  font-size: 28px;
+  margin-bottom: 16px;
+  text-shadow: 0 0 8px #00ffff;
+}
+
+.klimaat-info ul {
+  padding-left: 20px;
+}
+
+.klimaat-info li {
+  margin-bottom: 10px;
+}
+
+@keyframes pulseFade {
+  0%   { transform: scale(1); opacity: 0.8; }
+  50%  { transform: scale(1.08); opacity: 1; }
+  100% { transform: scale(1); opacity: 0.8; }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+#info-block {
+  max-width: 900px;
+  margin: 40px auto;
+  text-align: left;
+  font-size: 18px;
+  line-height: 1.6;
+  background-color: rgba(255, 255, 255, 0.08);
+  padding: 24px;
+  border-radius: 12px;
+  box-shadow: 0 0 24px rgba(0, 255, 255, 0.3);
+  transform: scale(0.95);
+  opacity: 0;
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+#info-block.visible {
+  opacity: 1;
+  transform: scale(1.05);
+}
+#info-block {
+  max-width: 900px;
+  margin: 40px auto;
+  text-align: left;
+  font-size: 18px;
+  line-height: 1.6;
+  background-color: rgba(255, 255, 255, 0.08);
+  padding: 24px;
+  border-radius: 12px;
+  box-shadow: 0 0 24px rgba(0, 255, 255, 0.3);
+  transform: scale(0.95);
+  opacity: 0;
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+#info-block.visible {
+  opacity: 1;
+  transform: scale(1.05);
+}
+
+/* Dynamische kleuraccenten per type */
+#info-block[data-active="palet"] {
+  box-shadow: 0 0 28px rgba(255, 165, 0, 0.5);
+  border-left: 6px solid orange;
+}
+
+#info-block[data-active="seizoenen"] {
+  box-shadow: 0 0 28px rgba(0, 255, 255, 0.5);
+  border-left: 6px solid cyan;
+}
+
+#info-block[data-active="temperatuur"] {
+  box-shadow: 0 0 28px rgba(255, 0, 0, 0.5);
+  border-left: 6px solid red;
+}
+
+#info-block[data-active="wind"] {
+  box-shadow: 0 0 28px rgba(0, 255, 128, 0.5);
+  border-left: 6px solid limegreen;
+}
+.back-button {
+  position: absolute;
+  top: 40px;
+  left: 40px;
+  background-color: rgba(255, 0, 0, 0.2);
+  color: #ff4d4d;
+  padding: 10px 18px;
+  font-size: 18px;
+  border-radius: 8px;
+  text-decoration: none;
+  box-shadow: 0 0 12px rgba(255, 0, 0, 0.4);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  z-index: 100;
+}
+
+.back-button:hover {
+  transform: scale(1.1);
+  box-shadow: 0 0 20px rgba(255, 0, 0, 0.6);
+  background-color: rgba(255, 0, 0, 0.4);
+}
+@media screen and (max-width: 768px) {
+  body {
+    font-size: 16px;
+    padding: 0;
+    margin: 0;
+    overflow-x: hidden;
+  }
+
+  .container {
+    flex-direction: column;
+    padding: 40px 20px;
+    height: auto;
+  }
+
+  .left, .right, .contact-container, .connectie-container {
+    width: 100%;
+    padding: 0;
+    text-align: center;
+  }
+
+  h1 {
+    font-size: 36px;
+    margin-bottom: 20px;
+  }
+
+  #intro, .intro {
+    font-size: 18px;
+    padding: 20px;
+    margin-bottom: 20px;
+  }
+
+  button, .back-button, .contact-options button, .quick-form button {
+    font-size: 16px;
+    padding: 12px 24px;
+    margin-top: 20px;
+  }
+
+  .worlds {
+    width: 100%;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 30px;
+    margin-top: 40px;
+  }
+
+  .world {
+    width: 100px;
+    height: 100px;
+    font-size: 48px;
+  }
+
+  .label {
+    font-size: 14px;
+    bottom: -24px;
+  }
+
+  .quick-form, .email-popup {
+    width: 100%;
+    max-width: 90%;
+    margin: 0 auto;
+    font-size: 16px;
+  }
+}

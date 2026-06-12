@@ -1,0 +1,73 @@
+body {
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background: linear-gradient(to bottom right, #660066, #330099); /* ✅ Paars naar indigo */
+  color: white;
+  overflow-x: hidden;
+}
+
+.container {
+  padding: 60px 40px;
+  box-sizing: border-box;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+h1 {
+  font-size: 48px;
+  text-shadow: 0 0 16px #cc99ff; /* ✅ Paars glow */
+}
+
+.intro {
+  font-size: 20px;
+  line-height: 1.6;
+  background-color: rgba(255, 255, 255, 0.05);
+  padding: 24px;
+  border-radius: 12px;
+  box-shadow: 0 0 24px rgba(255, 255, 255, 0.2);
+  margin-bottom: 30px;
+}
+
+.kaart-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  margin-bottom: 40px;
+}
+
+.kaart-buttons button {
+  background-color: #9933cc; /* ✅ Paars tint */
+  color: white;
+  border: none;
+  padding: 14px 28px;
+  font-size: 18px;
+  border-radius: 10px;
+  cursor: pointer;
+  box-shadow: 0 0 14px #cc99ff; /* ✅ Paars glow */
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.kaart-buttons button:hover {
+  box-shadow: 0 0 28px #ffccff; /* ✅ Lichtpaars hover-glow */
+  transform: scale(1.05);
+}
+
+button {
+  background-color: #663399; /* ✅ Indigo tint */
+  color: white;
+  border: none;
+  padding: 14px 28px;
+  font-size: 18px;
+  border-radius: 10px;
+  cursor: pointer;
+  box-shadow: 0 0 14px #cc99ff;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+button:hover {
+  box-shadow: 0 0 28px #ffccff;
+  transform: scale(1.05);
+}

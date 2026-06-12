@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>QC Login</title>
+  <link rel="stylesheet" href="explore.css">
+</head>
+<body>
+
+<div class="login-container" style="
+    width: 350px;
+    margin: 120px auto;
+    padding: 30px;
+    background: rgba(255,255,255,0.15);
+    backdrop-filter: blur(10px);
+    border-radius: 12px;
+    text-align: center;
+    color: white;
+">
+  <h2>QC Dashboard Toegang</h2>
+  <p>Voer de toegangscode in om verder te gaan.</p>
+
+  <input type="password" id="qcpass" placeholder="Toegangscode" style="
+      width: 90%;
+      padding: 10px;
+      margin-top: 15px;
+      border-radius: 8px;
+      border: none;
+  ">
+
+  <button onclick="checkQC()" style="
+      margin-top: 20px;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 8px;
+      background: #00c3ff;
+      color: black;
+      font-weight: bold;
+      cursor: pointer;
+  ">Inloggen</button>
+
+  <p id="error" style="color:#ff8080; display:none; margin-top:15px;">Onjuiste code.</p>
+</div>
+
+<script>
+function checkQC() {
+  const pw = document.getElementById("qcpass").value;
+  if (pw === "QC2026") {
+    window.location.href = "QC-menu.html";
+  } else {
+    document.getElementById("error").style.display = "block";
+  }
+}
+</script>
+
+</body>
+</html>

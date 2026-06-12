@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contact Us</title>
+  <link rel="stylesheet" href="contact.css" />
+</head>
+<body>
+  <div class="contact-container">
+    <a href="publiek.html" class="back-button">🧭 Terug naar Publieke Connectie</a>
+
+    <h1>📬 Contact Us</h1>
+    <p class="intro">Deze page biedt directe communicatie met de Unit Klimatologie.</p>
+
+    <div class="contact-options">
+  <button onclick="window.open('https://hydromet.sr/contact-2/', '_blank')">🌐 Bezoek hydromet.sr/contact</button>
+  <button onclick="toggleEmails()">📧 Toon e-mailadressen</button>
+</div>
+
+    <div id="email-list" class="email-popup hidden">
+  <a href="mailto:aanvraagklimadata@gmail.com">📧 aanvraagklimadata@gmail.com</a><br>
+  <a href="mailto:klimadata@hydromet.sr">📧 klimadata@hydromet.sr</a>
+</div>
+
+    <form action="https://formspree.io/f/mblpnnvz" method="POST" class="quick-form">
+      <h2>Stel snel een vraag</h2>
+      <input type="email" name="email" placeholder="Jouw e-mailadres" required />
+      <textarea name="message" placeholder="Typ hier je vraag of opmerking..." required></textarea>
+      <button type="submit">Verstuur</button>
+    </form>
+  </div>
+
+  <script>
+  function toggleEmails() {
+    const list = document.getElementById("email-list");
+    list.classList.toggle("hidden");
+  }
+</script>
+</body>
+</html>

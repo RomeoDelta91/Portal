@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Kaarten Overzicht</title>
+  <link rel="stylesheet" href="kaarten-view.css" />
+</head>
+<body>
+  <div class="container">
+    <h1>Klimaatkaarten per Element</h1>
+    <p class="intro">
+      Hieronder zie je de visuele kaarten van temperatuur, neerslag, wind en zonneschijn. Alle kaarten zijn gebaseerd op officiële waarnemingen en gegenereerd vanuit onze systemen.
+    </p>
+
+    <div class="kaart-gallery">
+      <div class="kaart-item">
+        <img src="docs/temperatuurkaart.png" alt="Temperatuurkaart" onclick="openPopup(this)" />
+        <p>🌡️ Temperatuur</p>
+        <a href="docs/temperatuurkaart.png" download class="download-btn">⬇️ Download</a>
+      </div>
+      <div class="kaart-item">
+        <img src="docs/neerslagkaart.png" alt="Neerslagkaart" onclick="openPopup(this)" />
+        <p>🌧️ Neerslag</p>
+        <a href="docs/neerslagkaart.png" download class="download-btn">⬇️ Download</a>
+      </div>
+      <div class="kaart-item">
+        <img src="docs/windkaart.png" alt="Windkaart" onclick="openPopup(this)" />
+        <p>💨 Windkaart</p>
+        <a href="docs/windkaart.png" download class="download-btn">⬇️ Download</a>
+    </div>
+      <div class="kaart-item">
+        <img src="docs/zonneschijnkaart.png" alt="Zonneschijnkaart" onclick="openPopup(this)" />
+        <p>☀️ Zonneschijn</p>
+        <a href="docs/zonneschijnkaart.png" download class="download-btn">⬇️ Download</a>
+      </div>
+    </div>
+
+    <button onclick="goBack()">Terug naar Kaarten en Grafieken</button>
+  </div>
+
+  <!-- Popup container -->
+  <div id="popup" class="popup" onclick="clickOutside(event)">
+    <span class="close" onclick="closePopup()">×</span>
+    <img id="popup-img" src="" alt="Vergrote kaart" />
+    <a id="popup-download" href="" download class="popup-download">⬇️ Download kaart</a>
+  </div>
+
+  <script src="kaarten-view.js"></script>
+</body>
+</html>

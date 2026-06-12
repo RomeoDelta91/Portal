@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8">
+  <title>Rainfall Hotspot Monitor</title>
+
+  <!-- Leaflet CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+
+  <!-- Chart.js + datalabels plugin -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script>
+
+  <style>
+    body {
+      margin: 0;
+      background: #02040a;
+      color: white;
+      font-family: 'Segoe UI', sans-serif;
+    }
+
+    .header {
+      padding: 20px;
+      background: rgba(0,0,0,0.4);
+      backdrop-filter: blur(8px);
+      text-align: center;
+      font-size: 26px;
+      letter-spacing: 1px;
+      text-shadow: 0 0 12px #00c3ff;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+
+    #map {
+      height: 70vh;
+      width: 100%;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+
+    .panel-container {
+      padding: 20px;
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .panel {
+      flex: 1;
+      min-width: 350px;
+      background: rgba(255,255,255,0.08);
+      padding: 20px;
+      border-radius: 12px;
+      backdrop-filter: blur(10px);
+      box-shadow: 0 0 15px rgba(0,195,255,0.2);
+    }
+
+    h2 {
+      margin-top: 0;
+      color: #00c3ff;
+    }
+
+    button {
+      margin-top: 10px;
+      padding: 8px 14px;
+      border: none;
+      border-radius: 6px;
+      background: #00c3ff;
+      color: black;
+      font-weight: bold;
+      cursor: pointer;
+      box-shadow: 0 0 10px rgba(0,195,255,0.4);
+    }
+
+    button:hover {
+      background: #33e6ff;
+    }
+  </style>
+</head>
+
+<body>
+
+<div class="header">🌧️ Rainfall Hotspot Monitor</div>
+
+<div id="map"></div>
+
+<div class="panel-container">
+
+  <!-- Paneel 1: Details van aangeklikt station -->
+  <div class="panel" id="station_details">
+    <h2>Station Details (laatste 10 dagen)</h2>
+    <div id="station_table"></div>
+    <canvas id="station_chart"></canvas>
+
+    <button id="download_station_csv">Download CSV</button>
+    <button id="download_station_png">Download Grafiek</button>
+  </div>
+
+  <!-- Paneel 2: Datumrange -->
+  <div class="panel" id="all_stations_panel">
+    <h2>Stations – datumrange (alleen stations met ≥ 10 mm worden weergegeven)</h2>
+
+
+    <label>Startdatum: <input type="date" id="range_start"></label>
+    <label>Einddatum: <input type="date" id="range_end"></label>
+
+    <button id="range_apply">Toon tabel</button>
+    <button id="download_range_csv">Download CSV</button>
+
+    <div id="all_stations_table"></div>
+  </div>
+
+  <!-- Paneel 3: Dag-selectie -->
+  <div class="panel" id="extreme_day_panel">
+    <h2>Dagselectie – Regen per station (alleen stations met ≥ 10 mm worden weergegeven)</h2>
+
+    <label>Kies een dag: <input type="date" id="day_picker"></label>
+
+    <canvas id="day_chart"></canvas>
+
+    <button id="download_day_png">Download grafiek</button>
+    <button id="download_day_csv">Download CSV</button>
+  </div>
+
+</div>
+
+<!-- Leaflet JS -->
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+<!-- JOUW SCRIPT -->
+<script src="rainfall_hotspots.js?v=7"></script>
+
+</body>
+</html>

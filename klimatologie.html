@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Klimaat van Suriname</title>
+  <link rel="stylesheet" href="klimatologie.css" />
+</head>
+<body>
+  <div class="klimaat-container">
+   <a href="explore.html" class="back-button"></a>
+    <h1>Klimaat van Suriname</h1>
+    <p class="intro">
+      Beweeg over een icoon. Elk onderdeel toont een unieke bouwsteen van ons klimaat.
+    </p>
+
+    <div class="modules">
+      <div class="module" data-info="palet">🎨<span class="label">Tropisch Palet</span></div>
+      <div class="module" data-info="seizoenen">📅<span class="label">Seizoensindeling</span></div>
+      <div class="module" data-info="temperatuur">🌡️<span class="label">Temperatuur</span></div>
+      <div class="module" data-info="wind">💨🌦️<span class="label">Wind & Weersinvloeden</span></div>
+    </div>
+
+    <div id="info-block" class="klimaat-info"></div>
+
+    <!-- Verborgen contentblokken -->
+    <div style="display:none;">
+      <div id="palet">
+        <h2>🎨 Tropisch Palet</h2>
+        <p>Suriname kent een <span class="glow">tropisch klimaat</span>, gekenmerkt door <strong>hoge temperaturen</strong>, <strong>veel zonne-uren</strong> en <strong>aanzienlijke neerslag</strong>. Volgens de <em>Köppen-Geigerclassificatie</em> zijn er drie hoofdtypes:</p>
+        <ul>
+          <li><strong>Af</strong>: Tropisch regenwoudklimaat <em>(noorden, inclusief kustregio’s)</em></li>
+          <li><strong>Am</strong>: Tropisch moessonklimaat <em>(zuidelijke laaglanden)</em></li>
+          <li><strong>Aw</strong>: Tropisch savanneklimaat <em>(berggebieden in het zuiden)</em></li>
+        </ul>
+      </div>
+
+      <div id="seizoenen">
+        <h2>📅 Seizoensindeling van Suriname</h2>
+        <ul>
+          <li><strong>Kleine regentijd:</strong> Eerste helft december – Eerste helft februari : ITCZ boven Suriname</li>
+          <li><strong>Kleine droge tijd:</strong> Eerste helft februari – Tweede helft maart : ITCZ ten zuiden</li>
+          <li><strong>Grote regentijd:</strong> Tweede helft maart – Tweede helft juli : ITCZ boven Suriname</li>
+          <li><strong>Grote droge tijd:</strong> Tweede helft juli – Eerste helft december : ITCZ boven Atlantische Oceaan</li>
+        </ul>
+        <p><em>Zelfs in droge tijden valt er soms gemiddeld nog 100–150 mm regen per maand.</em></p>
+      </div>
+
+      <div id="temperatuur">
+        <h2>🌡️ Temperatuur in Suriname</h2>
+        <ul>
+          <li><strong>Minimum (ochtend):</strong> 21–24 °C</li>
+          <li><strong>Maximum (middag):</strong> 31–34 °C</li>
+          <li><strong>Jaarlijks gemiddelde:</strong> ± 27 °C</li>
+          <li><strong>Berggebieden:</strong> ’s nachts net boven de 10 °C</li>
+        </ul>
+      </div>
+
+      <div id="wind">
+        <h2>💨🌦️ Wind & Weersinvloeden</h2>
+        <ul>
+          <li><strong>Invloedssfeer:</strong> Suriname ligt in de invloedssfeer van zowel de noordoostpassaat en zuidoostpassaat</li>
+          <li><strong>Sibibusies:</strong> sterke, lokale windstoten tijdens felle buien</li>
+          <li><strong>Grootschalige invloeden:</strong> uitlopers van orkanen, El Niño en La Niña beïnvloeden neerslagpatronen</li>
+        </ul>
+      </div>
+    </div>
+
+    <script src="klimatologie.js"></script>
+  </div>
+</body>
+</html>

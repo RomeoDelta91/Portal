@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Explore 2025</title>
+  <link rel="stylesheet" href="explore.css" />
+</head>
+<body>
+  <!-- Neon Rain Overlay -->
+  <div class="neon-rain"></div>
+
+  <div class="container">
+    <div class="left">
+      <h1>Explore <span id="year-heading"></span></h1>
+      <div id="intro">
+        <p>
+          Kies een <span class="glow">wereld</span> hier om te verkennen.<br />
+          Van <span class="glow">historische waarnemingen</span> tot <span class="glow">toekomstige modellen</span>:<br />
+          elke wereld toont een andere route van <span class="glow">klimaatdata</span>, <span class="glow">samenwerking</span> en <span class="glow">impact</span>.
+        </p>
+      </div>
+      <button onclick="goHome()">Terug naar homepage</button>
+    </div>
+
+    <div class="worlds">
+
+      <div class="world" onclick="window.location.href='klimatologie.html'">
+        🌍<span class="label">Klimaat van Suriname</span>
+      </div>
+
+      <a href="impact.html" class="world-link">
+        <div class="world">
+          🔮<span class="label">Klimaatimpact en Toekomstscenario’s</span>
+        </div>
+      </a>
+
+      <a href="verleden.html" class="world-link">
+        <div class="world">🕰️<span class="label">Klimaat in het verleden</span></div>
+      </a>
+
+      <div class="world" onclick="window.location.href='klimaatnormalen.html'">
+        📊<span class="label">Klimaatnormalen</span>
+      </div>
+
+
+      <a href="observer-login.html" class="world-link">
+        <div class="world">🔐<span class="label">Observer Login</span></div>
+      </a>
+
+      <div class="world" onclick="window.location.href='publiek.html'">
+        📨<span class="label">Publieke Connectie</span>
+      </div>
+
+      <!-- ⭐ QC-DASHBOARD VIA QC.html -->
+      <div class="world" onclick="window.location.href='QC.html'">
+        🧪<span class="label">QC Dashboard</span>
+      </div>
+
+      <div class="world" onclick="window.location.href='login_hotspots.html'">
+  🌧️<span class="label">Rainfall Hotspots</span>
+</div>
+
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script>
+    const currentYear = new Date().getFullYear();
+    document.getElementById("year-heading").textContent = currentYear;
+
+    function goHome() {
+      window.location.href = "index.html";
+    }
+
+    const rainContainer = document.querySelector('.neon-rain');
+    for (let i = 0; i < 80; i++) {
+      const drop = document.createElement('div');
+      drop.classList.add('drop');
+      drop.style.left = `${Math.random() * 100}vw`;
+      drop.style.animationDuration = `${1 + Math.random() * 2}s`;
+      drop.style.animationDelay = `${Math.random() * 5}s`;
+      rainContainer.appendChild(drop);
+    }
+  </script>
+
+</body>
+</html>

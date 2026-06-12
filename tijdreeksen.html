@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tijdreeksen</title>
+
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-QKPMD20CTB"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-QKPMD20CTB');
+  </script>
+
+  <link rel="stylesheet" href="tijdreeksen.css" />
+</head>
+
+<body>
+  <button class="back-btn" onclick="goToVerleden()">← Ga terug naar Klimaat in het Verleden</button>
+
+  <div class="container">
+    <h1 class="header">Tijdreeksen</h1>
+    <p class="intro">
+      Selecteer een element om de tijdreeksen van de afgelopen 10 dagen te bekijken. Elk element opent een tijdreeks in een tabel.
+    </p>
+  </div>
+
+  <div class="animation-zone">
+    <div class="element-core">ELEMENT</div>
+    <div class="element-buttons">
+
+      <!-- Externe link + event tracking -->
+      <button class="btn" id="neerslag"
+  onclick="gtag('event', 'click', { event_category: 'Tijdreeksen', event_label: 'Neerslag knop' });
+           navigateTo('tijdreeksen_neerslag.html')">
+  🌧️ Neerslag
+</button>
+
+      <button class="btn" id="temperatuur"
+        onclick="gtag('event', 'click', { event_category: 'Tijdreeksen', event_label: 'Temperatuur knop' });
+                 window.open('https://klima2025.pythonanywhere.com/temperatuur', '_blank')">
+  🌡️ Temperatuur
+</button>
+      <button class="btn" id="windrichting" onclick="navigateTo('windrichting.html')">🧭 Windrichting</button>
+      <button class="btn" id="windsnelheid" onclick="navigateTo('windsnelheid.html')">💨 Windsnelheid</button>
+      <button class="btn" id="vochtigheid" onclick="navigateTo('vochtigheid.html')">💧 Relatieve vochtigheid</button>
+      <button class="btn" id="druk" onclick="navigateTo('druk.html')">📉 Druk</button>
+      <button class="btn" id="zonneuren" onclick="navigateTo('zonneuren.html')">☀️ Zonne-uren</button>
+      <button class="btn" id="solarradiation" onclick="navigateTo('solarradiation.html')">🔆 Solar radiation</button>
+
+    </div>
+  </div>
+
+  <script>
+    function navigateTo(page) {
+      window.location.href = page;
+    }
+    function goToVerleden() {
+      window.location.href = "verleden.html";
+    }
+  </script>
+</body>
+</html>

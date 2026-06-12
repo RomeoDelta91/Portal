@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8">
+  <title>⬅️ Terug naar Kaarten en Grafieken</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      background: linear-gradient(to bottom right, #e6e0ff, #dcd0ff);
+      padding: 40px;
+      text-align: center;
+    }
+    h1 {
+      color: #4b0082;
+      font-size: 28px;
+      margin-bottom: 20px;
+    }
+    p {
+      font-size: 1.1em;
+      margin-bottom: 40px;
+      color: #333;
+    }
+    .button-container {
+      display: flex;
+      justify-content: center;
+      gap: 40px;
+      flex-wrap: wrap;
+    }
+    .grafiek-button {
+      padding: 16px 32px;
+      font-size: 18px;
+      background-color: #6a5acd;
+      color: white;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      text-decoration: none;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+      transition: all 0.3s ease;
+      display: inline-block;
+    }
+    .grafiek-button:hover {
+      background-color: #483d8b;
+      transform: translateY(-4px);
+      box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+    }
+    .terug-button {
+      margin-top: 50px;
+      background-color: #999;
+    }
+    .terug-button:hover {
+      background-color: #666;
+      transform: translateY(-3px);
+      box-shadow: 0 6px 12px rgba(0,0,0,0.2);
+    }
+  </style>
+</head>
+<body>
+  <h1>📊 Grafieken</h1>
+  <p>Kies hieronder welk type grafieken je wil bekijken. Alle data is gebaseerd op officiële waarnemingen.</p>
+
+  <div class="button-container">
+    <a href="https://dashboard-c5s6zvs8ycpjzdf4qsuo5n.streamlit.app/" target="_blank" class="grafiek-button">📈 AWS</a>
+    <a href="https://dashboard-pznegsqvgwbcs3rlhgnept.streamlit.app/" target="_blank" class="grafiek-button">📊 Synoptische data</a>
+    <a href="/grafiek_satelliet" class="grafiek-button">🛰️ Satellite data</a>
+  </div>
+
+  <a href="kaarten.html" class="grafiek-button terug-button">⬅️ Terug naar Kaarten en Grafieken</a>
+</body>
+</html>

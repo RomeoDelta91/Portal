@@ -1,0 +1,233 @@
+body {
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background: linear-gradient(to bottom right, #2e003e, #ff6600);
+  color: white;
+  overflow-x: hidden;
+}
+
+.container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 80px;
+  height: 100vh;
+  box-sizing: border-box;
+}
+
+.left {
+  width: 50%;
+  padding-right: 60px;
+  perspective: 1200px;
+}
+
+h1 {
+  font-size: 56px;
+  margin-bottom: 30px;
+  text-shadow: 0 0 14px #ff00ff;
+}
+
+#intro {
+  transform: translateX(-120%);
+  opacity: 0;
+  animation: slideInLeft 1.8s forwards;
+  animation-delay: 0.6s;
+  background-color: rgba(255, 255, 255, 0.05);
+  padding: 28px;
+  border-radius: 14px;
+  box-shadow: 0 0 24px rgba(255, 255, 255, 0.2);
+  transition: box-shadow 0.3s;
+}
+
+#intro:hover {
+  box-shadow: 0 0 40px rgba(255, 255, 255, 0.4);
+}
+
+@keyframes slideInLeft {
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+/* Explore-knop blijft block */
+button {
+  display: block;
+  margin-top: 50px;
+  background-color: #FF4500;
+  color: white;
+  border: none;
+  padding: 18px 36px;
+  font-size: 22px;
+  border-radius: 12px;
+  cursor: pointer;
+  box-shadow: 0 0 14px #FF4500;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+button:hover {
+  transform: scale(1.1) rotateX(6deg);
+  box-shadow: 0 0 28px #FF6347;
+}
+
+/* Home-knop exact zo breed als de tekst */
+.home-btn {
+  display: inline-block;
+  margin-top: 20px;
+  padding: 10px 16px;
+  background-color: #ffcc33;
+  color: #4a2a6a;
+  border-radius: 10px;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 20px;
+  box-shadow: 0 0 14px rgba(255, 204, 51, 0.6);
+  transition: transform 0.3s, background-color 0.3s, box-shadow 0.3s;
+}
+
+.home-btn:hover {
+  background-color: #ffd966;
+  transform: scale(1.05);
+  box-shadow: 0 0 24px rgba(255, 204, 51, 0.9);
+}
+
+.right {
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  gap: 50px;
+  justify-content: center;
+  align-items: center;
+}
+
+.icon {
+  font-size: 108px;
+  width: 180px;
+  height: 180px;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.08);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 28px rgba(255, 255, 255, 0.3);
+  animation: bounceFloat 2.5s ease-in-out infinite;
+  transition: transform 0.4s, box-shadow 0.4s;
+}
+
+.icon:hover {
+  transform: scale(1.35) rotateY(25deg);
+  box-shadow: 0 0 48px rgba(255, 255, 255, 0.6);
+}
+
+@keyframes bounceFloat {
+  0%   { transform: translateY(0px) scale(1); }
+  25%  { transform: translateY(-20px) scale(1.05); }
+  50%  { transform: translateY(0px) scale(1); }
+  75%  { transform: translateY(-12px) scale(1.03); }
+  100% { transform: translateY(0px) scale(1); }
+}
+
+@media screen and (max-width: 768px) {
+  body {
+    font-size: 16px;
+    padding: 0;
+    margin: 0;
+    overflow-x: hidden;
+  }
+
+  .container {
+    flex-direction: column;
+    padding: 40px 20px;
+    height: auto;
+  }
+
+  .left, .right, .contact-container, .connectie-container {
+    width: 100%;
+    padding: 0;
+    text-align: center;
+  }
+
+  h1 {
+    font-size: 36px;
+    margin-bottom: 20px;
+  }
+
+  #intro, .intro {
+    font-size: 18px;
+    padding: 20px;
+    margin-bottom: 20px;
+  }
+
+  button, .back-button, .contact-options button, .quick-form button {
+    font-size: 16px;
+    padding: 12px 24px;
+    margin-top: 20px;
+  }
+
+  .worlds {
+    width: 100%;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 30px;
+    margin-top: 40px;
+  }
+
+  .world {
+    width: 100px;
+    height: 100px;
+    font-size: 48px;
+  }
+
+  .label {
+    font-size: 14px;
+    bottom: -24px;
+  }
+
+  .quick-form, .email-popup {
+    width: 100%;
+    max-width: 90%;
+    margin: 0 auto;
+    font-size: 16px;
+  }
+}
+
+/* -------------------------------------------------- */
+/* 🔵 POPUP CSS TOEGEVOEGD — NIETS VAN JOUW CSS AANGEPAST */
+/* -------------------------------------------------- */
+
+.kaart-popup {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.6);
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+.kaart-popup-content {
+  background: white;
+  padding: 10px;
+  border-radius: 8px;
+  width: 90%;
+  max-width: 900px;
+  height: 80%;
+  position: relative;
+}
+
+.kaart-iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
+.close-popup {
+  position: absolute;
+  top: 8px;
+  right: 12px;
+  font-size: 28px;
+  cursor: pointer;
+  color: black;
+}

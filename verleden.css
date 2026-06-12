@@ -1,0 +1,81 @@
+body {
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background: linear-gradient(to bottom right, #333333, #996633);
+  color: white;
+  overflow-x: hidden;
+}
+
+.container {
+  padding: 60px 40px;
+  box-sizing: border-box;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+h1 {
+  font-size: 48px;
+  text-shadow: 0 0 14px #ffcc99;
+}
+
+.intro {
+  font-size: 20px;
+  line-height: 1.6;
+  background-color: rgba(255, 255, 255, 0.05);
+  padding: 24px;
+  border-radius: 12px;
+  box-shadow: 0 0 24px rgba(255, 255, 255, 0.2);
+  margin-bottom: 30px;
+}
+
+.verleden-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+  margin-bottom: 40px;
+}
+
+.verleden-buttons button {
+  background-color: #cc9966;
+  color: white;
+  border: none;
+  padding: 14px 28px;
+  font-size: 18px;
+  border-radius: 10px;
+  cursor: pointer;
+  box-shadow: 0 0 12px #cc9966;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.verleden-buttons button:hover {
+  box-shadow: 0 0 24px #ffcc99;
+  transform: scale(1.05);
+}
+
+button {
+  background-color: #996633;
+  color: white;
+  border: none;
+  padding: 14px 28px;
+  font-size: 18px;
+  border-radius: 10px;
+  cursor: pointer;
+  box-shadow: 0 0 12px #cc9966;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+button:hover {
+  box-shadow: 0 0 24px #ffcc99;
+  transform: scale(1.05);
+}
+
+.placeholder {
+  margin-top: 60px;
+  font-size: 24px;
+  text-align: center;
+  opacity: 0.6;
+}

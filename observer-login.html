@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Observer Login</title>
+  <link rel="stylesheet" href="observer-login.css" />
+</head>
+<body>
+  <div class="container">
+    <h1>Observer Login</h1>
+    <p class="intro">
+      Deze loginomgeving is bedoeld voor waarnemers van de Meteorologische Dienst Suriname. 
+      Klik hieronder om in te loggen en je waarnemingen digitaal in te voeren.
+    </p>
+
+    <!-- ⭐ STABIELE HTTPS-LINK NAAR PYTHONANYWHERE -->
+    <a href="https://klima2025.pythonanywhere.com" 
+       class="login-btn" 
+       target="_blank">
+       🔐 Ga naar Loginpagina
+    </a>
+
+    <button onclick="goToExplore()">Terug naar Explore 2025</button>
+  </div>
+
+  <script>
+    function goToExplore() {
+      window.location.href = "explore.html";
+    }
+  </script>
+</body>
+</html>

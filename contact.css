@@ -1,0 +1,201 @@
+body {
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background: linear-gradient(to bottom right, #ff3399, #ff9900);
+  color: white;
+  overflow-x: hidden;
+}
+
+.contact-container {
+  padding: 80px;
+  text-align: center;
+  position: relative;
+}
+
+h1 {
+  font-size: 48px;
+  margin-bottom: 20px;
+  text-shadow: 0 0 14px #ffcc00;
+}
+
+.intro {
+  font-size: 20px;
+  margin-bottom: 40px;
+  background-color: rgba(255, 255, 255, 0.05);
+  padding: 24px;
+  border-radius: 14px;
+  box-shadow: 0 0 24px rgba(255, 255, 255, 0.2);
+}
+
+.contact-options button {
+  background-color: #FF4500;
+  color: white;
+  border: none;
+  padding: 16px 32px;
+  font-size: 18px;
+  border-radius: 12px;
+  margin: 12px;
+  cursor: pointer;
+  box-shadow: 0 0 14px #FF4500;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.contact-options button:hover {
+  transform: scale(1.1);
+  box-shadow: 0 0 28px #FF6347;
+}
+
+.quick-form {
+  margin-top: 40px;
+  background-color: rgba(255, 255, 255, 0.05);
+  padding: 24px;
+  border-radius: 14px;
+  box-shadow: 0 0 24px rgba(255, 255, 255, 0.2);
+  display: inline-block;
+  text-align: left;
+  max-width: 480px;
+  width: 100%;
+}
+
+.quick-form h2 {
+  margin-bottom: 16px;
+}
+
+.quick-form input,
+.quick-form textarea {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 16px;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+}
+
+.quick-form button {
+  background-color: #FF4500;
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  font-size: 18px;
+  border-radius: 12px;
+  cursor: pointer;
+  box-shadow: 0 0 14px #FF4500;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.quick-form button:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 28px #FF6347;
+}
+
+.back-button {
+  position: absolute;
+  top: 40px;
+  left: 40px;
+  background-color: #FF4500;
+  color: white;
+  padding: 12px 24px;
+  border-radius: 12px;
+  text-decoration: none;
+  font-size: 18px;
+  box-shadow: 0 0 14px #FF4500;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.back-button:hover {
+  transform: scale(1.1);
+  box-shadow: 0 0 28px #FF6347;
+}
+.email-popup {
+  position: absolute;
+  top: 350px;
+  right: 60px;
+  background-color: rgba(255, 255, 255, 0.08);
+  padding: 20px 28px;
+  border-radius: 14px;
+  box-shadow: 0 0 24px rgba(255, 255, 255, 0.3);
+  font-size: 20px;
+  text-align: left;
+  z-index: 10;
+  transition: opacity 0.4s ease, transform 0.4s ease;
+  opacity: 1;
+}
+
+.email-popup.hidden {
+  display: none;
+}
+
+.email-popup a {
+  color: #ffffff;
+  text-decoration: none;
+  font-weight: bold;
+  display: block;
+  margin-bottom: 12px;
+  transition: color 0.3s ease;
+}
+
+.email-popup a:hover {
+  color: #ffcc00;
+}
+@media screen and (max-width: 768px) {
+  body {
+    font-size: 16px;
+    padding: 0;
+    margin: 0;
+    overflow-x: hidden;
+  }
+
+  .container {
+    flex-direction: column;
+    padding: 40px 20px;
+    height: auto;
+  }
+
+  .left, .right, .contact-container, .connectie-container {
+    width: 100%;
+    padding: 0;
+    text-align: center;
+  }
+
+  h1 {
+    font-size: 36px;
+    margin-bottom: 20px;
+  }
+
+  #intro, .intro {
+    font-size: 18px;
+    padding: 20px;
+    margin-bottom: 20px;
+  }
+
+  button, .back-button, .contact-options button, .quick-form button {
+    font-size: 16px;
+    padding: 12px 24px;
+    margin-top: 20px;
+  }
+
+  .worlds {
+    width: 100%;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 30px;
+    margin-top: 40px;
+  }
+
+  .world {
+    width: 100px;
+    height: 100px;
+    font-size: 48px;
+  }
+
+  .label {
+    font-size: 14px;
+    bottom: -24px;
+  }
+
+  .quick-form, .email-popup {
+    width: 100%;
+    max-width: 90%;
+    margin: 0 auto;
+    font-size: 16px;
+  }
+}

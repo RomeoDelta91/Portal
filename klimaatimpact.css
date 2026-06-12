@@ -1,0 +1,102 @@
+body {
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background: linear-gradient(to bottom right, #003344, #3399ff);
+  color: white;
+  padding: 80px;
+  text-align: center;
+}
+
+h1 {
+  font-size: 48px;
+  margin-bottom: 20px;
+  text-shadow: 0 0 14px #00ffff;
+}
+
+.intro {
+  font-size: 20px;
+  line-height: 1.6;
+  max-width: 800px;
+  margin: 0 auto 40px auto;
+  background-color: rgba(255, 255, 255, 0.08);
+  padding: 24px;
+  border-radius: 12px;
+  box-shadow: 0 0 24px rgba(0, 255, 255, 0.3);
+  animation: fadeIn 0.6s ease-in-out;
+}
+
+.back-button {
+  display: inline-block;
+  margin-bottom: 30px;
+  font-size: 20px;
+  color: #00e6ff;
+  text-decoration: none;
+  text-shadow: 0 0 10px #00ffff;
+  transition: 0.2s;
+}
+
+.back-button:hover {
+  transform: translateX(-4px);
+}
+
+.impact-grid {
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  flex-wrap: wrap;
+  margin-top: 40px;
+}
+
+.impact-card {
+  background: rgba(255, 255, 255, 0.12);
+  width: 260px;
+  padding: 30px;
+  border-radius: 16px;
+  text-decoration: none;
+  color: white;
+  box-shadow: 0 0 20px rgba(0, 255, 255, 0.25);
+  transition: 0.25s;
+  backdrop-filter: blur(6px);
+}
+
+.impact-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 0 30px rgba(0, 255, 255, 0.45);
+}
+
+.icon {
+  font-size: 60px;
+  margin-bottom: 12px;
+  text-shadow: 0 0 12px #00ffff;
+}
+
+.title {
+  font-size: 22px;
+  font-weight: bold;
+  margin-bottom: 8px;
+}
+
+.desc {
+  font-size: 15px;
+  opacity: 0.9;
+}
+
+/* Mobile */
+@media screen and (max-width: 768px) {
+  body {
+    padding: 20px;
+  }
+
+  h1 {
+    font-size: 36px;
+  }
+
+  .impact-grid {
+    flex-direction: column;
+    gap: 30px;
+  }
+
+  .impact-card {
+    width: 100%;
+  }
+}

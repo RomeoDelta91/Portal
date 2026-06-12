@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<title>Digitale Jaarrapportage 2025 – Meteorologische Dienst Suriname</title>
+
+<style>
+    body { margin:0; padding:0; background:#041018; font-family:Arial; color:#dff; }
+    .header { text-align:center; padding:35px 20px 10px; font-size:34px; font-weight:bold; color:#4fffe0; text-shadow:0 0 25px #00ffd0; }
+    .subheader { text-align:center; font-size:22px; margin-bottom:20px; color:#9fffea; }
+    .card { width:90%; margin:25px auto; background:rgba(0,255,200,0.05); border-radius:18px; padding:25px;
+            border:1px solid rgba(0,255,200,0.25); box-shadow:0 0 25px rgba(0,255,200,0.15); text-align:center; }
+    .card h2 { margin-top:0; color:#4fffe0; font-size:26px; text-shadow:0 0 10px #00ffd0; }
+    .metric { font-size:32px; font-weight:bold; color:#bff; margin-top:5px; margin-bottom:12px; }
+    .metric-label { font-size:16px; color:#9fffea; margin-bottom:18px; }
+    canvas { margin-top:20px; background:rgba(0,40,50,0.35); border-radius:14px; border:1px solid rgba(0,255,200,0.25); }
+    .label { position:absolute; color:#dff; font-size:14px; white-space:nowrap; }
+    #pieWrapper { position:relative; width:600px; margin:auto; }
+
+    /* TERUGKNOP STYLING */
+    .back-btn {
+        position: absolute;
+        top: 20px;
+        left: 20px;
+        padding: 10px 18px;
+        background: rgba(0,255,200,0.12);
+        border: 1px solid rgba(0,255,200,0.35);
+        border-radius: 10px;
+        color: #4fffe0;
+        text-decoration: none;
+        font-size: 16px;
+        backdrop-filter: blur(6px);
+        box-shadow: 0 0 12px rgba(0,255,200,0.25);
+    }
+</style>
+</head>
+<body>
+
+<!-- ⭐ TERUGKNOP -->
+<a href="jaarrapporten.html" class="back-btn">⬅ Terug</a>
+
+<div class="header">Digitale Jaarrapportage 2025 – Meteorologische Dienst Suriname</div>
+<div class="subheader">Neerslag voor geheel Suriname</div>
+
+<div class="card">
+    <h2>🌧️ Overzicht van het jaar</h2>
+
+    <div class="metric" id="jaarGem">...</div>
+    <div class="metric-label">Landelijk jaargemiddelde (mm)</div>
+
+    <div class="metric" id="hoogsteWaarde">...</div>
+    <div class="metric-label" id="hoogsteInfo">Hoogste waarde van het jaar</div>
+</div>
+
+<div class="card">
+    <h2>📡 Stations per type</h2>
+    <div id="pieWrapper">
+        <canvas id="pieTypes" width="600" height="300"></canvas>
+    </div>
+</div>
+
+<div class="card">
+    <h2>🌧️ Landelijke maandgemiddelden</h2>
+    <canvas id="maandChart" width="900" height="350"></canvas>
+</div>
+
+<script>
+// CSV LADEN
+async function loadCSV(path){
+    const resp = await fetch(path);
+    const text = await resp.text();
+    const lines = text.trim().split(/\r?\n/);
+    const header = lines[0].split(/,|\t/);
+
+    return lines.slice(1).map(line=>{
+        const cols = line.split(/,|\t/);
+        const obj = {};
+        header.forEach((h,i)=> obj[h.trim()] = (cols[i] ?? "").trim());
+        return obj;
+    });
+}
+
+const MONTH_NAMES = ["Januari","Februari","Maart","April","Mei","Juni","Juli","Augustus","September","Oktober","November","December"];
+
+function detectStationType(name){
+    if(!name) return "OTHER";
+    return name.split(" ").pop().toUpperCase();
+}
+
+// ⭐ SOM VAN DAGGEMIDDELEN = JAARLIJKSE GEMIDDELDE (~2000+ mm)
+function analyseWMO(data){
+    const yearTarget = 2025;
+
+    const stations = {};
+    let hoogste = { value:-999, station:"", date:"" };
+
+    const days = {};
+    const maandGem = Array(12).fill(0);
+    const maandCount = Array(12).fill(0);
+
+    data.forEach(r=>{
+        if(parseInt(r.Year) !== yearTarget) return;
+
+        const id = r.StationId;
+        const type = detectStationType(r.Station_Name);
+        stations[id] = type;
+
+        const m = parseInt(r.Month);
+        const d = parseInt(r.Day);
+        const p = parseFloat(r.PRECIP);
+
+        if(!isNaN(p)){
+            const key = `${m}-${d}`;
+            if(!days[key]) days[key] = [];
+            days[key].push(p);
+
+            if(p > hoogste.value){
+                hoogste = { value:p, station:r.Station_Name, date:`${d}-${m}-2025` };
+            }
+        }
+    });
+
+    let jaarTotaal = 0;
+
+    Object.keys(days).forEach(key=>{
+        const [m,d] = key.split("-").map(Number);
+        const arr = days[key];
+        if(arr.length === 0) return;
+
+        const dagGem = arr.reduce((a,b)=>a+b,0) / arr.length;
+        jaarTotaal += dagGem;
+
+        maandGem[m-1] += dagGem;
+        maandCount[m-1]++;
+    });
+
+    const maandFinal = maandGem.map((v,i)=> maandCount[i] > 0 ? v : 0);
+
+    const typeTotals = {};
+    Object.values(stations).forEach(t=>{
+        typeTotals[t] = (typeTotals[t] || 0) + 1;
+    });
+
+    return {
+        jaarGem: jaarTotaal,
+        hoogste,
+        maandGem: maandFinal,
+        typeTotals
+    };
+}
+
+// SEMI-DONUT
+function drawSemiDonut(canvasId,slices,colors,labels){
+    const c=document.getElementById(canvasId);
+    const ctx=c.getContext("2d");
+    const cx=c.width/2, cy=c.height, r=140;
+    const total=slices.reduce((a,b)=>a+b,0)||1;
+    let start=Math.PI;
+
+    const wrapper=document.getElementById("pieWrapper");
+    wrapper.querySelectorAll(".label").forEach(e=>e.remove());
+
+    slices.forEach((v,i)=>{
+        const angle=(v/total)*Math.PI;
+
+        ctx.beginPath();
+        ctx.moveTo(cx,cy);
+        ctx.fillStyle=colors[i%colors.length];
+        ctx.arc(cx,cy,r,start,start+angle);
+        ctx.fill();
+
+        const mid=start+angle/2;
+        const lx=cx+Math.cos(mid)*(r+20);
+        const ly=cy+Math.sin(mid)*(r+20);
+
+        const label=document.createElement("div");
+        label.className="label";
+        label.style.left=(lx<cx?lx-80:lx+10)+"px";
+        label.style.top=(ly-10)+"px";
+        label.textContent=labels[i]+" ("+v+")";
+        wrapper.appendChild(label);
+
+        start+=angle;
+    });
+}
+
+// BAR CHART
+function drawBar(canvasId,values,labels){
+    const c=document.getElementById(canvasId);
+    const ctx=c.getContext("2d");
+    const w=c.width, h=c.height;
+
+    ctx.clearRect(0,0,w,h);
+
+    const max=Math.max(...values,1);
+    const bw=(w/values.length)*0.55;
+    const sp=(w/values.length)*0.45;
+
+    values.forEach((v,i)=>{
+        const x=i*(bw+sp)+sp/2;
+        const bh=(v/max)*(h*0.75);
+        const y=h-bh-30;
+
+        ctx.fillStyle="rgba(0,255,200,0.85)";
+        ctx.fillRect(x,y,bw,bh);
+
+        ctx.fillStyle="#bff";
+        ctx.font="14px Arial";
+        ctx.textAlign="center";
+        ctx.fillText(v.toFixed(1)+" mm",x+bw/2,y-5);
+        ctx.fillText(labels[i].slice(0,3),x+bw/2,h-10);
+    });
+}
+
+// INIT
+async function initDashboard(){
+    const data = await loadCSV("docs/Rainfall_Data_Suriname_2025.csv");
+    const r = analyseWMO(data);
+
+    document.getElementById("jaarGem").textContent = r.jaarGem.toFixed(1) + " mm";
+
+    document.getElementById("hoogsteWaarde").textContent =
+        "Hoogste waarde van het jaar: " + r.hoogste.value.toFixed(1) + " mm";
+
+    document.getElementById("hoogsteInfo").textContent =
+        `${r.hoogste.station} — ${r.hoogste.date}`;
+
+    const labels = Object.keys(r.typeTotals);
+    const values = Object.values(r.typeTotals);
+    const colors = ["#4FD1C5","#63B3ED","#F6AD55","#9F7AEA","#F56565","#68D391","#ED64A6","#A0AEC0"];
+
+    if(labels.length>0){
+        drawSemiDonut("pieTypes",values,colors,labels);
+    }
+
+    drawBar("maandChart",r.maandGem,MONTH_NAMES);
+}
+
+initDashboard();
+</script>
+
+</body>
+</html>

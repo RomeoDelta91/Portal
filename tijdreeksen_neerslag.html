@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tijdreeksen – Neerslag</title>
+
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script>
+
+  <style>
+    body {
+      margin: 0;
+      padding: 20px;
+      font-family: 'Segoe UI', sans-serif;
+      color: white;
+      background: radial-gradient(circle at 20% 20%, #0a0f1f, #000);
+    }
+
+    .top-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .back-btn {
+      padding: 8px 16px;
+      background: linear-gradient(90deg, #7a5cff, #00c3ff);
+      border: none;
+      border-radius: 20px;
+      color: black;
+      font-weight: bold;
+      cursor: pointer;
+      box-shadow: 0 0 12px rgba(0,195,255,0.6);
+    }
+
+    .header {
+      flex: 1;
+      text-align: center;
+      font-size: 32px;
+      text-shadow: 0 0 16px #00c3ff;
+      margin-bottom: 5px;
+    }
+
+    .info-text {
+      text-align: center;
+      font-size: 18px;
+      margin-top: 5px;
+      color: #ccefff;
+      text-shadow: 0 0 8px rgba(0,195,255,0.6);
+    }
+
+    #map {
+      height: 60vh;
+      width: 100%;
+      margin-top: 20px;
+      border-radius: 14px;
+      box-shadow: 0 0 20px rgba(0,195,255,0.4);
+    }
+
+    .panel {
+      margin-top: 25px;
+      padding: 20px;
+      background: rgba(255,255,255,0.06);
+      border-radius: 14px;
+      box-shadow: 0 0 25px rgba(0,195,255,0.35);
+    }
+
+    .panel h2 {
+      font-size: 28px;
+      color: #00c3ff;
+      text-shadow: 0 0 14px #00c3ff;
+      margin-bottom: 10px;
+    }
+
+    #station_name_display {
+      font-size: 22px;
+      margin-bottom: 10px;
+      color: #ffeb99;
+      text-shadow: 0 0 10px rgba(255,235,153,0.9);
+    }
+
+    #station_table table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 20px;
+      box-shadow: 0 0 18px rgba(0,195,255,0.35);
+      border-radius: 10px;
+      overflow: hidden;
+    }
+
+    #station_table th {
+      padding: 12px;
+      font-size: 22px;
+      background: rgba(0,195,255,0.25);
+      text-shadow: 0 0 10px #00c3ff;
+    }
+
+    #station_table td {
+      padding: 10px;
+      border-bottom: 1px solid rgba(255,255,255,0.15);
+      text-shadow: 0 0 6px rgba(255,255,255,0.4);
+    }
+
+    #station_table tr:hover {
+      background: rgba(0,195,255,0.12);
+    }
+
+    .row-light { background: rgba(0,255,213,0.18); }
+    .row-matig { background: rgba(255,240,0,0.18); }
+    .row-zwaar { background: rgba(255,123,0,0.18); }
+    .row-zeer { background: rgba(255,26,26,0.18); }
+    .row-dry { background: rgba(0,195,255,0.18); }
+
+    .chart-wrapper {
+      width: 100%;
+      height: 230px;
+      margin-top: 20px;
+      padding: 10px;
+      border-radius: 12px;
+      background: rgba(255,255,255,0.04);
+      box-shadow: 0 0 22px rgba(0,195,255,0.35);
+    }
+
+    #station_chart {
+      width: 100% !important;
+      height: 100% !important;
+      filter: drop-shadow(0 0 8px #00c3ff);
+    }
+
+    .btn-download {
+      margin-top: 15px;
+      padding: 10px 18px;
+      background: #00c3ff;
+      color: black;
+      border-radius: 10px;
+      font-weight: bold;
+      border: none;
+      cursor: pointer;
+      box-shadow: 0 0 14px rgba(0,195,255,0.7);
+      font-size: 16px;
+    }
+  </style>
+</head>
+
+<body>
+
+<div class="top-bar">
+  <button class="back-btn" onclick="goBack()">← Terug</button>
+  <div style="flex:1;">
+    <h1 class="header" id="page_title">Tijdreeksen – Neerslag</h1>
+
+    <div class="info-text">
+      Zoom in en uit op de kaart en klik op een station om de neerslag van de afgelopen 10 dagen van dit station te bekijken.
+    </div>
+  </div>
+</div>
+
+<div id="map"></div>
+
+<div class="panel">
+  <h2>Station Details (laatste 10 dagen)</h2>
+  <div id="station_name_display">Nog geen station geselecteerd</div>
+
+  <div id="station_table"></div>
+
+  <div class="chart-wrapper">
+    <canvas id="station_chart"></canvas>
+  </div>
+
+  <button id="download_table" class="btn-download">📄 Download tabel</button>
+  <button id="download_graph" class="btn-download">📊 Download grafiek</button>
+</div>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+<script>
+function goBack() { window.location.href = "tijdreeksen.html"; }
+
+let stationsLast10 = [];
+let stationChart = null;
+let currentStation = null;
+
+const map = L.map("map").setView([4.8, -55.2], 7);
+L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png").addTo(map);
+
+/* ⭐ CATEGORIE FUNCTIE — NU NA‑PROOF */
+function getCategory(rain) {
+  if (rain === null || rain === undefined || rain === "" || isNaN(rain)) {
+    return "Geen data";
+  }
+  if (rain === 0) return "Droge Dag (0 mm)";
+  if (rain <= 10) return "Lichte Neerslag (≤10 mm)";
+  if (rain <= 30) return "Matige Neerslag (≤30 mm)";
+  if (rain <= 60) return "Zware Neerslag (≤60 mm)";
+  return "Zeer Zware Neerslag (>60 mm)";
+}
+
+/* ⭐ NEON KLEUREN */
+function getColor(cat) {
+  if (cat.includes("Geen data")) return "#888888";
+  if (cat.includes("Zeer Zware")) return "#ff1a1a";
+  if (cat.includes("Zware Neerslag")) return "#ff7b00";
+  if (cat.includes("Matige")) return "#fff000";
+  if (cat.includes("Lichte")) return "#00ffd5";
+  return "#00c3ff";
+}
+
+/* ⭐ NA FORMATTER */
+function formatRain(rain) {
+  if (rain === null || rain === undefined || rain === "" || isNaN(rain)) {
+    return "NA";
+  }
+  return Number(rain).toFixed(1);
+}
+
+/* ⭐ FETCH */
+fetch("https://klima2025.pythonanywhere.com/api/hotspots10days")
+  .then(r => r.json())
+  .then(data => {
+    stationsLast10 = data.stations_last10;
+    stationsLast10.forEach(st => {
+      const last = st.Last10Days.at(-1);
+      const cat = getCategory(last.rain);
+      const color = getColor(cat);
+
+      const radius =
+        cat.includes("Zeer Zware") ? 16 :
+        cat.includes("Zware Neerslag") ? 13 :
+        cat.includes("Matige") ? 11 :
+        9;
+
+      const m = L.circleMarker([st.Latitude, st.Longitude], {
+        radius: radius,
+        color: color,
+        fillColor: color,
+        fillOpacity: 0.85
+      }).addTo(map);
+
+      m.on("click", () => showStationDetails(st));
+    });
+  });
+
+/* ⭐ TABEL */
+function showStationDetails(station) {
+  currentStation = station;
+
+  document.getElementById("station_name_display").innerText =
+    `Station: ${station.StationID}`;
+
+  let html = `
+    <table>
+      <tr>
+        <th>Datum</th>
+        <th>Neerslag (mm)</th>
+        <th>Categorie</th>
+      </tr>
+  `;
+
+  station.Last10Days.forEach(d => {
+    const cat = getCategory(d.rain);
+
+    let rowClass = "";
+    let emoji = "";
+
+    if (cat.includes("Geen data")) { rowClass = "row-dry"; emoji = "⚠️"; }
+    else if (cat.includes("Lichte")) { rowClass = "row-light"; emoji = "🌦️"; }
+    else if (cat.includes("Matige")) { rowClass = "row-matig"; emoji = "🌧️"; }
+    else if (cat.includes("Zware Neerslag")) { rowClass = "row-zwaar"; emoji = "🌧️🌧️"; }
+    else if (cat.includes("Zeer Zware")) { rowClass = "row-zeer"; emoji = "⛈️"; }
+    else if (cat.includes("Droge")) { rowClass = "row-dry"; emoji = "☀️"; }
+
+    html += `
+      <tr class="${rowClass}">
+        <td>${d.date}</td>
+        <td>${formatRain(d.rain)}</td>
+        <td>${emoji} ${cat}</td>
+      </tr>
+    `;
+  });
+
+  html += "</table>";
+  document.getElementById("station_table").innerHTML = html;
+
+  buildChart(station);
+}
+
+/* ⭐ GRAFIEK — NA FIX + BRACKET FIX */
+function buildChart(station) {
+  const ctx = document.getElementById("station_chart");
+
+  if (stationChart) stationChart.destroy();
+
+  stationChart = new Chart(ctx, {
+    type: "bar",
+    plugins: [ChartDataLabels],
+    data: {
+      labels: station.Last10Days.map(d => d.date),
+      datasets: [{
+        label: "",
+        data: station.Last10Days.map(d => {
+          if (d.rain === null || d.rain === undefined || d.rain === "" || isNaN(d.rain)) {
+            return 0; // balkhoogte
+          }
+          return Number(d.rain);
+        }),
+        backgroundColor: station.Last10Days.map(d =>
+          getColor(getCategory(d.rain))
+        ),
+        barPercentage: 0.45,
+        categoryPercentage: 0.45
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        title: {
+          display: true,
+          text: `Neerslag (mm) – ${station.StationID}`,
+          color: "white",
+          font: { size: 22, weight: "bold" },
+          padding: { bottom: 10 }
+        },
+        datalabels: {
+          anchor: "end",
+          align: "top",
+          color: "white",
+          font: { size: 16, weight: "bold" },
+          formatter: (value, context) => {
+            const d = station.Last10Days[context.dataIndex];
+            return formatRain(d.rain);
+          }
+        },
+        legend: {
+          labels: { color: "white", font: { size: 16 } }
+        },
+        tooltip: {
+          titleFont: { size: 16 },
+          bodyFont: { size: 16 }
+        }
+      },
+      scales: {
+        x: {
+          ticks: { color: "white", font: { size: 16 } },
+          grid: { display: false }
+        },
+        y: {
+          ticks: { color: "white", font: { size: 16 } },
+          beginAtZero: true,
+          grid: { color: "rgba(255,255,255,0.1)" }
+        }
+      }
+    }
+  });
+}
+
+/* ⭐ DOWNLOAD KNOPPEN */
+document.addEventListener("DOMContentLoaded", () => {
+
+  document.getElementById("download_table").addEventListener("click", () => {
+    if (!currentStation) return;
+
+    let csv = `Station: ${currentStation.StationID}\n\n`;
+    csv += "Datum,Neerslag (mm),Categorie\n";
+
+    currentStation.Last10Days.forEach(d => {
+      csv += `${d.date},${formatRain(d.rain)},${getCategory(d.rain)}\n`;
+    });
+
+    const blob = new Blob([csv], { type: "text/csv;charset=utf-8;" });
+    const link = document.createElement("a");
+    link.href = URL.createObjectURL(blob);
+    link.download = `neerslag_${currentStation.StationID}_10dagen_tabel.csv`;
+    link.click();
+  });
+
+  document.getElementById("download_graph").addEventListener("click", () => {
+    if (!currentStation || !stationChart) return;
+
+    const link = document.createElement("a");
+    link.download = `neerslag_${currentStation.StationID}_10dagen_grafiek.png`;
+    link.href = document.getElementById("station_chart").toDataURL("image/png");
+    link.click();
+  });
+
+});
+</script>
+
+</body>
+</html>

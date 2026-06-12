@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>QC Menu</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: linear-gradient(to bottom right, #ff9966, #ff5e62);
+      height: 100vh;
+      margin: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: white;
+      text-align: center;
+    }
+    .menu-box {
+      background: rgba(255,255,255,0.15);
+      padding: 30px;
+      border-radius: 12px;
+      backdrop-filter: blur(10px);
+      width: 350px;
+    }
+    button {
+      width: 100%;
+      padding: 12px;
+      margin-top: 15px;
+      border: none;
+      border-radius: 8px;
+      background: #00c3ff;
+      color: black;
+      font-weight: bold;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+<div class="menu-box">
+  <h2>QC Dashboard Menu</h2>
+  <p>Kies een QC‑onderdeel.</p>
+
+  <button onclick="window.location.href='https://qcdashboardaws-a2jcxc4evexastnthevbqd.streamlit.app/'">
+    🌡️ Temperatuur QC
+</button>
+
+<button onclick="window.location.href='https://qcdashboardaws-3v6w2bwbcmhyznwkpywjzb.streamlit.app/'">
+    💨 Windrichting QC
+</button>
+
+  <!-- Later kan je hier meer knoppen toevoegen -->
+  <!-- Bijvoorbeeld: -->
+  <!-- <button>🌧️ Neerslag QC</button> -->
+  <!-- <button>💨 Wind QC</button> -->
+</div>
+
+</body>
+</html>

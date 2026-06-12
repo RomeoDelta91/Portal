@@ -1,0 +1,158 @@
+body {
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background: linear-gradient(to bottom right, #006633, #ccffcc);
+  color: white;
+  overflow-x: hidden;
+}
+
+.connectie-container {
+  position: relative;
+  padding: 80px;
+  text-align: center;
+}
+
+h1 {
+  font-size: 48px;
+  margin-bottom: 20px;
+  text-shadow: 0 0 14px #ffcc00;
+}
+
+.intro {
+  font-size: 20px;
+  margin-bottom: 40px;
+  background-color: rgba(255, 255, 255, 0.05);
+  padding: 24px;
+  border-radius: 14px;
+  box-shadow: 0 0 24px rgba(255, 255, 255, 0.2);
+}
+
+.modules {
+  display: flex;
+  justify-content: center;
+  gap: 60px;
+  flex-wrap: wrap;
+}
+
+.module {
+  font-size: 64px;
+  width: 160px;
+  height: 160px;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.08);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 24px rgba(255, 255, 255, 0.3);
+  transition: transform 0.4s, box-shadow 0.4s;
+  cursor: pointer;
+  position: relative;
+}
+
+.module:hover {
+  transform: scale(1.2) rotateY(12deg);
+  box-shadow: 0 0 36px rgba(255, 255, 255, 0.6);
+}
+
+.label {
+  position: absolute;
+  bottom: -28px;
+  background-color: rgba(255, 255, 255, 0.1);
+  color: white;
+  padding: 6px 12px;
+  border-radius: 8px;
+  font-size: 16px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.4s ease, transform 0.4s ease;
+  transform: translateY(10px);
+  white-space: nowrap;
+  text-align: center;
+}
+
+.module:hover .label {
+  opacity: 1;
+  transform: translateY(0);
+  box-shadow: 0 0 12px rgba(255, 255, 255, 0.4);
+}
+
+.back-button {
+  display: inline-block;
+  background-color: #FF4500;
+  color: white;
+  padding: 12px 24px;
+  border-radius: 12px;
+  text-decoration: none;
+  font-size: 18px;
+  box-shadow: 0 0 14px #FF4500;
+  transition: transform 0.3s, box-shadow 0.3s;
+  position: absolute;
+  top: 40px;
+  left: 40px;
+}
+
+.back-button:hover {
+  transform: scale(1.1);
+  box-shadow: 0 0 28px #FF6347;
+}@media screen and (max-width: 768px) {
+  body {
+    font-size: 16px;
+    padding: 0;
+    margin: 0;
+    overflow-x: hidden;
+  }
+
+  .container {
+    flex-direction: column;
+    padding: 40px 20px;
+    height: auto;
+  }
+
+  .left, .right, .contact-container, .connectie-container {
+    width: 100%;
+    padding: 0;
+    text-align: center;
+  }
+
+  h1 {
+    font-size: 36px;
+    margin-bottom: 20px;
+  }
+
+  #intro, .intro {
+    font-size: 18px;
+    padding: 20px;
+    margin-bottom: 20px;
+  }
+
+  button, .back-button, .contact-options button, .quick-form button {
+    font-size: 16px;
+    padding: 12px 24px;
+    margin-top: 20px;
+  }
+
+  .worlds {
+    width: 100%;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 30px;
+    margin-top: 40px;
+  }
+
+  .world {
+    width: 100px;
+    height: 100px;
+    font-size: 48px;
+  }
+
+  .label {
+    font-size: 14px;
+    bottom: -24px;
+  }
+
+  .quick-form, .email-popup {
+    width: 100%;
+    max-width: 90%;
+    margin: 0 auto;
+    font-size: 16px;
+  }
+}

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8">
+  <title>Rainfall Hotspot Monitor</title>
+  <link rel="stylesheet" href="explore.css">
+
+  <style>
+    body {
+      margin: 0;
+      background: #02040a;
+      color: white;
+      font-family: 'Segoe UI', sans-serif;
+    }
+
+    .header {
+      padding: 20px;
+      background: rgba(0,0,0,0.4);
+      backdrop-filter: blur(8px);
+      text-align: center;
+      font-size: 26px;
+      letter-spacing: 1px;
+      text-shadow: 0 0 12px #00c3ff;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+
+    #map {
+      height: 70vh;
+      width: 100%;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+
+    .panel-container {
+      padding: 20px;
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .panel {
+      flex: 1;
+      min-width: 300px;
+      background: rgba(255,255,255,0.08);
+      padding: 20px;
+      border-radius: 12px;
+      backdrop-filter: blur(10px);
+      box-shadow: 0 0 15px rgba(0,195,255,0.2);
+    }
+  </style>
+</head>
+
+<body>
+
+<div class="header">🌧️ Rainfall Hotspot Monitor</div>
+
+<div id="map"></div>
+
+<div class="panel-container">
+  <div class="panel">Top 5 huidige maand</div>
+  <div class="panel">Top 5 vorige maand (eerste helft)</div>
+  <div class="panel">Stations tabel</div>
+</div>
+
+<script src="rainfall_hotspots.js"></script>
+
+</body>
+</html>
