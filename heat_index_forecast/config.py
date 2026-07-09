@@ -21,6 +21,9 @@ load_dotenv()
 EE_PROJECT = os.getenv("EE_PROJECT", "ee-zanderij")
 EE_SERVICE_ACCOUNT = os.getenv("EE_SERVICE_ACCOUNT", "")
 EE_PRIVATE_KEY_FILE = os.getenv("EE_PRIVATE_KEY_FILE", "")
+# Alternatief voor CI (GitHub Actions): de JSON-sleutel als string in een
+# secret, zodat er geen bestand op schijf hoeft te staan.
+EE_PRIVATE_KEY_DATA = os.getenv("EE_PRIVATE_KEY_DATA", "")
 
 GFS_COLLECTION = "NOAA/GFS0P25"
 BAND_TEMP = "temperature_2m_above_ground"        # °C
@@ -37,8 +40,10 @@ LAGGED_ENSEMBLE_RUNS = 4
 # ---------------------------------------------------------------------------
 # Gebied
 # ---------------------------------------------------------------------------
-# Suriname bounding box: 1.8°N–6.1°N, 58.1°W–53.9°W  (west, zuid, oost, noord)
-SURINAME_BBOX = (-58.1, 1.8, -53.9, 6.1)
+# Suriname bounding box (west, zuid, oost, noord). Iets ruimer dan de
+# oorspronkelijke 1.8°N–6.1°N / 58.1°W–53.9°W zodat het grid het volledige
+# districten-shapefile dekt (dat tot 1.46°N en 58.43°W reikt).
+SURINAME_BBOX = (-58.5, 1.4, -53.9, 6.1)
 
 # Doelresolutie voor gridexport, in graden (GFS-native is 0.25°).
 GRID_SCALE_DEG = 0.25

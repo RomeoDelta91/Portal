@@ -23,6 +23,7 @@ import ee
 from config import (
     BAND_RH,
     BAND_TEMP,
+    EE_PRIVATE_KEY_DATA,
     EE_PRIVATE_KEY_FILE,
     EE_PROJECT,
     EE_SERVICE_ACCOUNT,
@@ -43,12 +44,17 @@ GFS_NATIVE_SCALE_M = 27830  # ±0.25° op de evenaar
 def init_ee() -> None:
     """Initialiseer Earth Engine.
 
-    - Met EE_SERVICE_ACCOUNT + EE_PRIVATE_KEY_FILE in .env: service account
-      (productie/cron, stap 8).
+    - Met EE_SERVICE_ACCOUNT + EE_PRIVATE_KEY_FILE (pad) of
+      EE_PRIVATE_KEY_DATA (JSON-string, voor CI-secrets): service account.
     - Anders: lokaal opgeslagen credentials van `ee.Authenticate()`.
     """
-    if EE_SERVICE_ACCOUNT and EE_PRIVATE_KEY_FILE:
-        creds = ee.ServiceAccountCredentials(EE_SERVICE_ACCOUNT, EE_PRIVATE_KEY_FILE)
+    if EE_SERVICE_ACCOUNT and (EE_PRIVATE_KEY_FILE or EE_PRIVATE_KEY_DATA):
+        if EE_PRIVATE_KEY_DATA:
+            creds = ee.ServiceAccountCredentials(
+                EE_SERVICE_ACCOUNT, key_data=EE_PRIVATE_KEY_DATA
+            )
+        else:
+            creds = ee.ServiceAccountCredentials(EE_SERVICE_ACCOUNT, EE_PRIVATE_KEY_FILE)
         ee.Initialize(creds, project=EE_PROJECT)
         log.info("EE geïnitialiseerd met service account %s", EE_SERVICE_ACCOUNT)
     else:

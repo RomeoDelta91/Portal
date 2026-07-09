@@ -1,0 +1,53 @@
+# Dagelijkse heat-indexforecast: draait de pipeline met een Earth Engine-
+# service-account en commit de 'latest'-uitvoerbestanden, zodat het op
+# Streamlit Community Cloud gehoste dashboard altijd actuele data heeft.
+#
+# Vereiste repository-secrets (Settings → Secrets and variables → Actions):
+#   EE_SERVICE_ACCOUNT   e-mailadres van het service account
+#   EE_PRIVATE_KEY_DATA  volledige inhoud van de JSON-sleutel
+name: Heat index forecast (dagelijks)
+
+on:
+  schedule:
+    # 09:15 UTC = 06:15 uur Surinaamse tijd; de GFS 00Z-run is dan
+    # doorgaans volledig beschikbaar in Earth Engine.
+    - cron: "15 9 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  forecast:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+
+      - name: Dependencies installeren
+        run: pip install -r heat_index_forecast/requirements.txt
+
+      - name: Pipeline draaien
+        working-directory: heat_index_forecast
+        env:
+          EE_PROJECT: ee-zanderij
+          EE_SERVICE_ACCOUNT: ${{ secrets.EE_SERVICE_ACCOUNT }}
+          EE_PRIVATE_KEY_DATA: ${{ secrets.EE_PRIVATE_KEY_DATA }}
+        run: python run_pipeline.py
+
+      - name: Nieuwe forecast committen
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add heat_index_forecast/data/output/station_forecast_latest.csv \
+                  heat_index_forecast/data/output/heat_index_forecast_latest.nc
+          if git diff --cached --quiet; then
+            echo "Geen wijzigingen om te committen."
+          else
+            git commit -m "Dagelijkse heat-indexforecast $(date -u +'%Y-%m-%d %H:%M UTC')"
+            git push
+          fi

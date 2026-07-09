@@ -17,7 +17,11 @@ venv/
 
 # Gedownloade ruwe data & pipeline-output
 heat_index_forecast/data/raw/
-heat_index_forecast/data/output/
+# Output is git-ignored, BEHALVE de 'latest'-bestanden: die worden door de
+# dagelijkse GitHub Action gecommit zodat het gehoste dashboard ze kan lezen.
+heat_index_forecast/data/output/*
+!heat_index_forecast/data/output/station_forecast_latest.csv
+!heat_index_forecast/data/output/heat_index_forecast_latest.nc
 *.grib2
 *.tif
 *.tiff

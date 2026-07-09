@@ -1,6 +1,18 @@
+# Gedeelde dependencies voor de Streamlit-apps in deze repo.
+# Streamlit Community Cloud installeert dit bestand (repo-root).
+
+# klimaat_dashboard.py
 streamlit
 pandas
 altair
 matplotlib
 reportlab
 xlsxwriter
+
+# heat_index_forecast/dashboard/app.py
+numpy
+xarray
+netCDF4
+folium
+streamlit-folium
+python-dotenv

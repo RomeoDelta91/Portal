@@ -16,8 +16,15 @@ Nederlandstalig Streamlit-dashboard.
 | `netcdf_export.py` | CF-1.8 NetCDF-export (P50 + spread) |
 | `run_pipeline.py` | Orchestrator voor de volledige dagelijkse run |
 | `dashboard/app.py` | Streamlit-dashboard (kaart + tijdreeksen, NL) |
+| `geo.py` | Districtsgrenzen (GeoJSON) + land-masker voor het grid |
 | `scripts/test_gee_auth.py` | Minimale rooktest voor EE-authenticatie (stap 2) |
+| `scripts/convert_districts.py` | Eenmalige shapefile → GeoJSON-conversie |
 | `tests/test_heat_index.py` | Unit-tests tegen de officiële NOAA-tabel |
+
+De officiële districten-shapefile (UTM 21N) staat in `data/geo/`; het
+dashboard gebruikt de daaruit geconverteerde WGS84-GeoJSON voor de
+districtsgrenzen op de kaart en om de gridkleuring tot het landoppervlak
+te beperken.
 
 ## Installatie
 
@@ -97,25 +104,54 @@ python -m pytest tests/ -v
    namen (dims `dayofyear`/`hour`/`lat`/`lon`), maar het echte bestand is
    nog niet aangekoppeld.
 
-## Stap 8 — service account & dagelijkse runs (nog niet actief)
+## Hosten op Streamlit Community Cloud (geen lokale installatie nodig)
 
-Pas uitvoeren nadat de kernpipeline end-to-end werkt:
+De opzet is zo gemaakt dat er **niets op een eigen pc hoeft te draaien**:
+
+1. **Service account aanmaken** (eenmalig, in de browser) — zie stappen
+   1–3 onder "Stap 8" hieronder.
+2. **GitHub-secrets instellen**: in deze repo → *Settings → Secrets and
+   variables → Actions* → twee secrets toevoegen:
+   - `EE_SERVICE_ACCOUNT` — het e-mailadres van het service account
+   - `EE_PRIVATE_KEY_DATA` — de volledige inhoud van de JSON-sleutel
+     (openen in een teksteditor, alles kopiëren en plakken)
+3. **GitHub Action** — `.github/workflows/heat_index_daily.yml` draait de
+   pipeline elke ochtend (06:15 uur Surinaamse tijd) en commit
+   `data/output/station_forecast_latest.csv` en
+   `heat_index_forecast_latest.nc` naar de repo. Handmatig starten kan via
+   *Actions → Heat index forecast (dagelijks) → Run workflow*.
+4. **Streamlit Cloud koppelen**: ga naar https://share.streamlit.io, log in
+   met GitHub, kies *New app* en vul in:
+   - Repository: `RomeoDelta91/Portal`
+   - Branch: de branch waarop dit staat
+   - Main file path: `heat_index_forecast/dashboard/app.py`
+
+   Streamlit Cloud installeert de `requirements.txt` in de repo-root en
+   herstart de app automatisch bij elke commit — dus ook bij elke
+   dagelijkse data-update van de Action.
+
+Het dashboard zelf heeft géén Earth Engine-credentials nodig: het leest
+alleen de door de Action gecommitte bestanden.
+
+## Stap 8 — service account & dagelijkse runs
+
+Nodig voor de GitHub Action hierboven:
 
 1. In Google Cloud Console, project `ee-zanderij`: *IAM & Admin → Service
    Accounts → Create*, bv. `heatindex-runner@ee-zanderij.iam.gserviceaccount.com`.
 2. Rol **Earth Engine Resource Viewer** (of hoger) toekennen en het account
    registreren voor Earth Engine op
    https://code.earthengine.google.com/register (zelfde Cloud-project).
-3. JSON-sleutel aanmaken, opslaan **buiten** de repo, en in `.env`:
+3. JSON-sleutel aanmaken (*Keys → Add key → JSON*) en de inhoud in de
+   GitHub-secrets zetten zoals hierboven beschreven. De sleutel hoort
+   **nooit** in de repo zelf.
+4. De dagelijkse planning loopt via de GitHub Action; een eigen server met
+   cron is niet nodig. Wie tóch lokaal wil draaien zet in `.env`:
    ```
    EE_SERVICE_ACCOUNT=heatindex-runner@ee-zanderij.iam.gserviceaccount.com
    EE_PRIVATE_KEY_FILE=/pad/naar/sleutel.json
    ```
-   `gee_fetch.init_ee()` gebruikt het service account dan automatisch.
-4. Cron (dagelijks ~05:30 lokale tijd, na binnenkomst van de 06Z-run):
-   ```
-   30 5 * * * cd /pad/naar/Portal/heat_index_forecast && .venv/bin/python run_pipeline.py >> data/output/pipeline.log 2>&1
-   ```
+   `gee_fetch.init_ee()` pakt het service account dan automatisch op.
 
 Credentials horen nooit in git: `.env`, sleutels en ruwe data staan in
 `.gitignore`.

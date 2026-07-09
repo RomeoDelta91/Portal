@@ -30,6 +30,7 @@ from config import (  # noqa: E402
     SURINAME_BBOX,
     classify_hi,
 )
+from geo import load_districts, suriname_mask  # noqa: E402
 
 st.set_page_config(
     page_title="Heat Index verwachting Suriname — MDS",
@@ -162,6 +163,9 @@ with kaart_kolom:
             mask = np.isfinite(arr) & (arr >= cat.hi_min_c)
             h = cat.kleur.lstrip("#")
             rgba[mask] = [int(h[0:2], 16), int(h[2:4], 16), int(h[4:6], 16), 170]
+        # Alleen binnen de landsgrenzen kleuren (districten-shapefile)
+        land = suriname_mask(grid.lat.values, grid.lon.values)
+        rgba[~land] = 0
         folium.raster_layers.ImageOverlay(
             image=rgba,
             bounds=[[float(grid.lat.min()) - 0.125, float(grid.lon.min()) - 0.125],
@@ -170,6 +174,17 @@ with kaart_kolom:
         ).add_to(m)
     else:
         st.info("Geen grid-bestand gevonden — alleen stations worden getoond.")
+
+    # Districtsgrenzen
+    folium.GeoJson(
+        load_districts(),
+        name="Districten",
+        style_function=lambda f: {
+            "color": "#444444", "weight": 1.2, "fillOpacity": 0,
+        },
+        highlight_function=lambda f: {"weight": 2.5, "color": "#111111"},
+        tooltip=folium.GeoJsonTooltip(fields=["district"], labels=False),
+    ).add_to(m)
 
     tijdstip_df = df[df["valid_time"] == keuze_tijd]
     for s in STATIONS:
@@ -190,7 +205,9 @@ with kaart_kolom:
             ),
         ).add_to(m)
 
-    st_folium(m, height=430, use_container_width=True)
+    # returned_objects=[]: kaart is puur weergave; voorkomt een Streamlit-
+    # rerun bij elke muisbeweging op de kaart (belangrijk op gratis hosting).
+    st_folium(m, height=430, use_container_width=True, returned_objects=[])
 
     # Legenda
     legenda = "".join(
@@ -209,6 +226,9 @@ with reeks_kolom:
     )
     s_key = next(s.key for s in STATIONS if s.naam == station_naam)
     sub = df[df["station"] == s_key].sort_values("valid_time").copy()
+    sub["tijd_label"] = sub["lokale_tijd"].map(
+        lambda t: f"{DAGEN_NL[t.weekday()]} {t.strftime('%d-%m %H:%M')}"
+    )
 
     y_min = float(min(sub["hi_p10"].min(), 24.0)) - 1.0
     y_max = float(max(sub["hi_p90"].max(), 44.0)) + 1.5
@@ -226,8 +246,13 @@ with reeks_kolom:
                        "naam": cat.naam_nl, "kleur": cat.kleur})
     banden_df = pd.DataFrame(banden)
 
+    # Nederlandse dagafkortingen op de as (Vega formatteert standaard Engels)
+    dag_expr = (
+        "['zo','ma','di','wo','do','vr','za'][+timeFormat(datum.value, '%w')]"
+        " + ' ' + timeFormat(datum.value, '%d-%m %Hu')"
+    )
     x_as = alt.X("lokale_tijd:T", title="Lokale tijd (UTC−3)",
-                 axis=alt.Axis(format="%a %d-%m %Hu", labelAngle=-40))
+                 axis=alt.Axis(labelExpr=dag_expr, labelAngle=-40))
     y_schaal = alt.Scale(domain=[y_min, y_max])
 
     laag_banden = alt.Chart(banden_df).mark_rect(opacity=0.14).encode(
@@ -256,7 +281,7 @@ with reeks_kolom:
         x=x_as,
         y=alt.Y("hi_p50:Q", scale=y_schaal),
         tooltip=[
-            alt.Tooltip("lokale_tijd:T", title="Lokale tijd", format="%a %d-%m %H:%M"),
+            alt.Tooltip("tijd_label:N", title="Lokale tijd"),
             alt.Tooltip("hi_p50:Q", title="Hitte-index P50 (°C)", format=".1f"),
             alt.Tooltip("hi_p10:Q", title="Ondergrens P10 (°C)", format=".1f"),
             alt.Tooltip("hi_p90:Q", title="Bovengrens P90 (°C)", format=".1f"),
@@ -269,7 +294,7 @@ with reeks_kolom:
     grafiek = (laag_banden + laag_bandlabels + laag_onzeker + laag_p50).properties(
         height=420
     ).configure_axis(grid=True, gridOpacity=0.25)
-    st.altair_chart(grafiek, use_container_width=True)
+    st.altair_chart(grafiek, width='stretch')
     st.caption(
         "Donkerblauwe lijn: centrale verwachting (P50). Blauwe band: "
         "onzekerheidsmarge (P10–P90, spreiding tussen opeenvolgende GFS-runs). "
@@ -287,7 +312,8 @@ with uitleg_kolom:
     st.subheader("Risicocategorieën")
     st.caption(
         "Suriname-geadapteerde hitte-indexschaal (voorlopige klassegrenzen, "
-        "vastgesteld o.b.v. de lokale klimatologie — niet de NOAA/VS-schaal)."
+        "definitief vast te stellen o.b.v. de ERA5-Land-klimatologie — "
+        "niet de NOAA/VS-schaal)."
     )
     for i, cat in enumerate(RISK_CATEGORIES):
         bereik = (
@@ -313,7 +339,7 @@ with tabel_kolom:
         .round(1).unstack("datum")
     )
     piv.index.name = "Station"
-    st.dataframe(piv, use_container_width=True)
+    st.dataframe(piv, width='stretch')
     st.caption("Maximale hitte-index (P50, °C) per dag, lokale tijd.")
 
 st.divider()
