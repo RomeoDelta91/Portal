@@ -18,7 +18,7 @@ load_dotenv()
 # ---------------------------------------------------------------------------
 # Earth Engine
 # ---------------------------------------------------------------------------
-EE_PROJECT = os.getenv("EE_PROJECT", "ee-zanderij")
+EE_PROJECT = os.getenv("EE_PROJECT", "my-project-brokopondo")
 EE_SERVICE_ACCOUNT = os.getenv("EE_SERVICE_ACCOUNT", "")
 EE_PRIVATE_KEY_FILE = os.getenv("EE_PRIVATE_KEY_FILE", "")
 # Alternatief voor CI (GitHub Actions): de JSON-sleutel als string in een

@@ -1,13 +1,13 @@
 """Stap 2 — minimale rooktest voor Earth Engine-authenticatie.
 
 Draai dit script éénmalig lokaal om te bevestigen dat authenticatie met het
-project `ee-zanderij` werkt vóórdat de volledige pipeline wordt gebruikt:
+project `my-project-brokopondo` werkt vóórdat de volledige pipeline wordt gebruikt:
 
     cd heat_index_forecast
     python scripts/test_gee_auth.py
 
 Bij de eerste keer opent `ee.Authenticate()` een browservenster; log in met
-meteozanderijdata@gmail.com. Er is geen wachtwoord of API-key in dit script
+ritish199187@gmail.com. Er is geen wachtwoord of API-key in dit script
 nodig — de credentials worden door de earthengine-api zelf lokaal opgeslagen.
 """
 

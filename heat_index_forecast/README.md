@@ -42,8 +42,8 @@ python scripts/test_gee_auth.py
 ```
 
 Bij de eerste keer opent een browservenster: log in met
-`meteozanderijdata@gmail.com`. Het script bevestigt daarna toegang tot het
-project `ee-zanderij` en print gemiddelde 2m-temperatuur en RH van de meest
+`ritish199187@gmail.com`. Het script bevestigt daarna toegang tot het
+project `my-project-brokopondo` en print gemiddelde 2m-temperatuur en RH van de meest
 recente GFS-analyse over de Suriname-bbox. Pas als dit werkt heeft het zin de
 volledige pipeline te draaien.
 
@@ -137,8 +137,8 @@ alleen de door de Action gecommitte bestanden.
 
 Nodig voor de GitHub Action hierboven:
 
-1. In Google Cloud Console, project `ee-zanderij`: *IAM & Admin → Service
-   Accounts → Create*, bv. `heatindex-runner@ee-zanderij.iam.gserviceaccount.com`.
+1. In Google Cloud Console, project `my-project-brokopondo`: *IAM & Admin → Service
+   Accounts → Create*, bv. `heatindex-runner@my-project-brokopondo.iam.gserviceaccount.com`.
 2. Rol **Earth Engine Resource Viewer** (of hoger) toekennen en het account
    registreren voor Earth Engine op
    https://code.earthengine.google.com/register (zelfde Cloud-project).
@@ -148,7 +148,7 @@ Nodig voor de GitHub Action hierboven:
 4. De dagelijkse planning loopt via de GitHub Action; een eigen server met
    cron is niet nodig. Wie tóch lokaal wil draaien zet in `.env`:
    ```
-   EE_SERVICE_ACCOUNT=heatindex-runner@ee-zanderij.iam.gserviceaccount.com
+   EE_SERVICE_ACCOUNT=heatindex-runner@my-project-brokopondo.iam.gserviceaccount.com
    EE_PRIVATE_KEY_FILE=/pad/naar/sleutel.json
    ```
    `gee_fetch.init_ee()` pakt het service account dan automatisch op.

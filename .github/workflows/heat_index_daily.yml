@@ -34,7 +34,7 @@ jobs:
       - name: Pipeline draaien
         working-directory: heat_index_forecast
         env:
-          EE_PROJECT: ee-zanderij
+          EE_PROJECT: my-project-brokopondo
           EE_SERVICE_ACCOUNT: ${{ secrets.EE_SERVICE_ACCOUNT }}
           EE_PRIVATE_KEY_DATA: ${{ secrets.EE_PRIVATE_KEY_DATA }}
         run: python run_pipeline.py
