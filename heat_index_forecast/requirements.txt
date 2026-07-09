@@ -1,0 +1,19 @@
+# Heat Index Forecast Suriname — MDS
+# Kern (data-pipeline)
+earthengine-api>=0.1.400
+numpy>=1.24
+scipy>=1.10
+pandas>=2.0
+xarray>=2023.6
+rioxarray>=0.14
+netCDF4>=1.6
+
+# Dashboard
+streamlit>=1.30
+altair>=5.0
+folium>=0.15
+streamlit-folium>=0.15
+
+# Config & tests
+python-dotenv>=1.0
+pytest>=7.4
